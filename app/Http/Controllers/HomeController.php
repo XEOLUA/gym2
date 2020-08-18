@@ -12,6 +12,8 @@ class HomeController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function index(){
+
+
         return view('index');
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Navigation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,3 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('index');
+View::composer('home.header', function($view)
+{
+
+    $view->with('nav', Navigation::where('block_id',1)->where('active',1)->orderBy('order')->get());
+
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
