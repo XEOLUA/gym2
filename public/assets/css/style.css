@@ -34,7 +34,8 @@
 * 1. common styles
 */
 body {
-  font-family: "Poppins";
+  /*font-family: "Poppins";*/
+  font-family: "Arial";
   color: #81868a;
   font-size: 16px;
   line-height: 34px;
@@ -413,7 +414,7 @@ a:visited {
 
 .header-navigation ul.navigation-box > li {
   position: relative;
-  padding: 35px 0;
+  padding: 15px 0;
   display: inline-block;
   vertical-align: middle;
   /* Second Level Menu */
@@ -437,7 +438,7 @@ a:visited {
   -webkit-transition: all .4s ease;
   transition: all .4s ease;
   position: relative;
-  text-transform: capitalize;
+  text-transform: none;
   letter-spacing: -0.02em;
   font-size: 16px;
   font-weight: 500;
@@ -503,7 +504,7 @@ a:visited {
   font-size: 15px;
   color: #fff;
   font-weight: 500;
-  padding: 12px 30px;
+  padding: 5px 20px;
   display: block;
   line-height: 26px;
   white-space: nowrap;
@@ -586,7 +587,7 @@ a:visited {
   font-size: 15px;
   color: #fff;
   font-weight: 500;
-  padding: 12px 30px;
+  padding: 5px 20px;
   display: block;
   line-height: 26px;
   white-space: nowrap;
@@ -6312,7 +6313,7 @@ a:visited {
   border-radius: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  border: 20px solid #fff;
+  border: 3px solid #fff;
   z-index: 11;
 }
 

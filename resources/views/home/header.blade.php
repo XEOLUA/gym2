@@ -4,22 +4,22 @@
         <div class="container clearfix">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="logo-box clearfix">
-                <a class="navbar-brand" href="index.html">
-                    <img src="images/logo.png" class="main-logo" height="58" alt="Awesome Image" />
+                <a class="navbar-brand" href="\">
+                    <img src="{{url('images/logo.png')}}" class="main-logo" height="58" alt="Awesome Image" />
                 </a>
                 <div class="header__social">
 {{--                    <a href="#"><i class="fab fa-twitter"></i></a>--}}
                     <a href="#"><i class="fab fa-facebook-square"></i></a>
-                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+{{--                    <a href="#"><i class="fab fa-pinterest-p"></i></a>--}}
+{{--                    <a href="#"><i class="fab fa-instagram"></i></a>--}}
                 </div><!-- /.header__social -->
                 <button class="menu-toggler" data-target=".main-navigation">
                     <span class="kipso-icon-menu"></span>
                 </button>
             </div><!-- /.logo-box -->
             <!-- Collect the nav links, forms, and other content for toggling -->
-
             <div class="main-navigation">
+{{--                {{dd($MyNavBar)}}--}}
             {!! $MyNavBar->asUl(['class' => 'navigation-box'], ['class' => 'sub-menu']) !!}
             </div>
 {{--            <div class="main-navigation">--}}
