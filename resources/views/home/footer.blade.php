@@ -1,4 +1,4 @@
-{!! $menu1->asUl() !!}
+{{--{!! $menu1->asUl() !!}--}}
 <footer class="site-footer">
     <div class="site-footer__upper">
         <div class="container">

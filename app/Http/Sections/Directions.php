@@ -18,13 +18,13 @@ use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 use SleepingOwl\Admin\Section;
 
 /**
- * Class Users
+ * Class Directions
  *
- * @property \App\User $model
+ * @property \App\Direction $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Users extends Section implements Initializable
+class Directions extends Section implements Initializable
 {
     /**
      * @var bool
@@ -46,7 +46,7 @@ class Users extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-users');
+        $this->addToNavigation()->setPriority(100)->setIcon('fa fa-lightbulb-o');
     }
 
     /**
@@ -90,7 +90,7 @@ class Users extends Section implements Initializable
 
         $display->setColumnFilters([
             AdminColumnFilter::select()
-                ->setModelForOptions(\App\User::class, 'name')
+                ->setModelForOptions(\App\Direction::class, 'name')
                 ->setLoadOptionsQueryPreparer(function($element, $query) {
                     return $query;
                 })

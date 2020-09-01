@@ -3,25 +3,25 @@
 <head>
 
     <title>Гімназія №2 м.Хмельницький</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png">
-    <link rel="manifest" href="assets/images/favicons/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{url('assets/images/favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url('assets/images/favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url('assets/images/favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{url('assets/images/favicons/site.webmanifest')}}">
 
     <!-- plugin scripts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,500i,600,700,800%7CSatisfy&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome-free-5.11.2-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/plugins/kipso-icons/style.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/vegas.min.css">
+    <link rel="stylesheet" href="{{url('assets/css/animate.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/plugins/fontawesome-free-5.11.2-web/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/plugins/kipso-icons/style.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/vegas.min.css')}}">
 
     <!-- template styles -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/responsive.css')}}">
 
 
 
@@ -109,19 +109,19 @@
 {{--</script>--}}
 
 
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/owl.carousel.min.js"></script>
-<script src="assets/js/waypoints.min.js"></script>
-<script src="assets/js/jquery.counterup.min.js"></script>
-<script src="assets/js/TweenMax.min.js"></script>
-<script src="assets/js/wow.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/countdown.min.js"></script>
-<script src="assets/js/vegas.min.js"></script>
+<script src="{{url('assets/js/jquery.min.js')}}"></script>
+<script src="{{url('assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{url('assets/js/owl.carousel.min.js')}}"></script>
+<script src="{{url('assets/js/waypoints.min.js')}}"></script>
+<script src="{{url('assets/js/jquery.counterup.min.js')}}"></script>
+<script src="{{url('assets/js/TweenMax.min.js')}}"></script>
+<script src="{{url('assets/js/wow.js')}}"></script>
+<script src="{{url('assets/js/jquery.magnific-popup.min.js')}}"></script>
+<script src="{{url('assets/js/countdown.min.js')}}"></script>
+<script src="{{url('assets/js/vegas.min.js')}}"></script>
 
 <!-- template scripts -->
-<script src="assets/js/theme.js"></script>
+<script src="{{url('assets/js/theme.js')}}"></script>
 
 </body>
 </html>
