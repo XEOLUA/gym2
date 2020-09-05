@@ -34,7 +34,7 @@ class Navigation extends Section implements Initializable
     /**
      * @var string
      */
-    protected $title;
+    protected $title='Навігація';
 
     /**
      * @var string

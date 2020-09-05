@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Direction;
 use App\Page;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -13,7 +14,8 @@ class HomeController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function index(){
-        return view('index');
+        $direction = Direction::where('active',1)->get();
+        return view('index',compact('direction'));
     }
 
     public function news(){
@@ -22,7 +24,8 @@ class HomeController extends BaseController
 
     public function page($slug){
         $pageContent = Page::where('slug',$slug)->get();
+
 //        dd($pageContent);
-        return view('page',['pageContent'=>$pageContent]);
+        return view('page',compact('pageContent'));
     }
 }

@@ -34,7 +34,7 @@ class Users extends Section implements Initializable
     /**
      * @var string
      */
-    protected $title;
+    protected $title='Користувачі';
 
     /**
      * @var string
@@ -46,7 +46,7 @@ class Users extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-users');
+        $this->addToNavigation()->setPriority(100)->setIcon('far fa-user');
     }
 
     /**
