@@ -36,7 +36,7 @@ class Pages extends Section implements Initializable
     /**
      * @var string
      */
-    protected $title;
+    protected $title='Сторінки';
 
     /**
      * @var string
@@ -76,8 +76,9 @@ class Pages extends Section implements Initializable
         ];
 
         $display = AdminDisplay::datatables()
-            ->setName('firstdatatables')
-            ->setOrder([[0, 'asc']])
+            ->setApply(function ($query) {
+                $query->orderBy('id', 'asc');
+            })
             ->setDisplaySearch(true)
             ->paginate(25)
             ->setColumns($columns)
