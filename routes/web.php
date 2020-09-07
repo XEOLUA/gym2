@@ -26,4 +26,6 @@ Auth::routes();
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/news', 'HomeController@news')->name('news');
+Route::get('/statistics', 'HomeController@statistics')->name('statistics');
 Route::get('/page/{slug}', 'HomeController@page')->name('page');
+

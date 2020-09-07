@@ -12,4 +12,6 @@ class getData
         $data = Navigation::where('block_id',$block_id)->get();
         return $data;
     }
+
+
 }

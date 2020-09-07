@@ -39,7 +39,7 @@
                     <img src="{{url('/images/ngt.jpg')}}" alt="">
                     <div class="about-two__count">
                         <div class="about-two__count-text">Дипломів
-                            <span class="counter">4890</span></div><!-- /.about-two__count-text -->
+                            <span class="counter">{{$diplomsCnt}}</span></div><!-- /.about-two__count-text -->
                     </div><!-- /.about-two__count -->
                 </div><!-- /.about-two__image -->
             </div><!-- /.col-lg-6 -->
