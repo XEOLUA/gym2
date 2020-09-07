@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOlympstatisticsTable extends Migration
+class CreateManstatisticsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateOlympstatisticsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('mansubjects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->timestamps();
+//            $table->timestamps();
         });
 
-        Schema::create('olympstatistics', function (Blueprint $table) {
+        Schema::create('manstatistics', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('level');
             $table->integer('subject_id')->unsigned();
@@ -27,10 +27,10 @@ class CreateOlympstatisticsTable extends Migration
             $table->integer('year');
             $table->string('pupil');
             $table->integer('position');
-            $table->timestamps();
+//            $table->timestamps();
 
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->foreign('subject_id')->references('id')->on('mansubjects')->onDelete('cascade');
         });
     }
 
@@ -41,7 +41,7 @@ class CreateOlympstatisticsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
-        Schema::dropIfExists('olympstatistics');
+        Schema::dropIfExists('mansabjects');
+        Schema::dropIfExists('manstatistics');
     }
 }

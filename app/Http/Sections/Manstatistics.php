@@ -3,7 +3,6 @@
 namespace App\Http\Sections;
 
 use AdminColumn;
-use AdminColumnEditable;
 use AdminColumnFilter;
 use AdminDisplay;
 use AdminForm;
@@ -19,13 +18,13 @@ use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 use SleepingOwl\Admin\Section;
 
 /**
- * Class Subjects
+ * Class Manstatistics
  *
- * @property \App\Subject $model
+ * @property \App\Manstatistic $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Subjects extends Section implements Initializable
+class Manstatistics extends Section implements Initializable
 {
     /**
      * @var bool
@@ -35,7 +34,7 @@ class Subjects extends Section implements Initializable
     /**
      * @var string
      */
-    protected $title='Предмети';
+    protected $title='МАН';
 
     /**
      * @var string
@@ -47,7 +46,7 @@ class Subjects extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-book-reader');
+        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-hand-peace');
     }
 
     /**
@@ -59,12 +58,24 @@ class Subjects extends Section implements Initializable
     {
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumnEditable::text('name', 'Name')
+            AdminColumn::link('name', 'Name', 'created_at')
                 ->setSearchCallback(function($column, $query, $search){
                     return $query
                         ->orWhere('name', 'like', '%'.$search.'%')
+                        ->orWhere('created_at', 'like', '%'.$search.'%')
                     ;
                 })
+                ->setOrderable(function($query, $direction) {
+                    $query->orderBy('created_at', $direction);
+                })
+            ,
+            AdminColumn::boolean('name', 'On'),
+            AdminColumn::text('created_at', 'Created / updated', 'updated_at')
+                ->setWidth('160px')
+                ->setOrderable(function($query, $direction) {
+                    $query->orderBy('updated_at', $direction);
+                })
+                ->setSearchable(false)
             ,
         ];
 
@@ -74,7 +85,21 @@ class Subjects extends Section implements Initializable
             ->setDisplaySearch(true)
             ->paginate(25)
             ->setColumns($columns)
+            ->setHtmlAttribute('class', 'table-primary table-hover th-center')
         ;
+
+        $display->setColumnFilters([
+            AdminColumnFilter::select()
+                ->setModelForOptions(\App\Manstatistic::class, 'name')
+                ->setLoadOptionsQueryPreparer(function($element, $query) {
+                    return $query;
+                })
+                ->setDisplay('name')
+                ->setColumnName('name')
+                ->setPlaceholder('All names')
+            ,
+        ]);
+        $display->getColumnFilters()->setPlacement('card.heading');
 
         return $display;
     }

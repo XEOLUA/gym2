@@ -72,12 +72,12 @@ class Classes extends Section implements Initializable
             AdminColumnEditable::select('teacher_id')->setLabel('Кл. керівник')
                 ->setOptions($teachers)
                 ->setDisplay('Кл. керівник')
-                ->setTitle('Оберыть керівника класу')
+                ->setTitle('Оберіть керівника класу')
             ,
             AdminColumnEditable::select('cabinet_id')->setLabel('Кабінет')
                 ->setOptions($cabinets)
                 ->setDisplay('Кабінет')
-                ->setTitle('Оберыть кабінет')
+                ->setTitle('Оберіть кабінет')
                 ->append(AdminColumn::relatedLink('cabinets.id'))
             ,
         ];

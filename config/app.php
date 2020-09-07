@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
+//        App\Services\GetSuffixByNumber::class,
 
     ],
 
@@ -228,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Menu' => Lavary\Menu\Facade::class,
+        'get_suffix' => App\Services\GetSuffixByNumber::class,
     ],
 
 ];

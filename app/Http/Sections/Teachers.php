@@ -65,9 +65,11 @@ class Teachers extends Section implements Initializable
                     return $query
                         ->orWhere('snp', 'like', '%' . $search . '%');
                 }),
+            AdminColumn::lists('mo.name', 'МО'),
 //            AdminColumn::image('photo', 'Фото')->setWidth('10px'),
             AdminColumnEditable::select('sex', 'Стать', ['ч'=>'ч', 'ж'=>'ж'])
                 ->setDisplay('Стать'),
+            AdminColumnEditable::checkbox('active','on')
         ];
 
         $display = AdminDisplay::datatables()
