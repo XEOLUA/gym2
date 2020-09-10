@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterMoteachersTable extends Migration
+class AlterMosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AlterMoteachersTable extends Migration
     public function up()
     {
         Schema::table('mos', function (Blueprint $table) {
-            $table->string('image')->nullable()->after('active');
+            $table->string('link')->nullable()->after('image');
         });
     }
 
@@ -26,7 +26,7 @@ class AlterMoteachersTable extends Migration
     public function down()
     {
         Schema::table('mos', function (Blueprint $table) {
-            $table->dropColumn('image');
+            $table->dropColumn('link');
         });
     }
 }

@@ -2,7 +2,7 @@
     <div class="container-fluid text-center">
         <div class="block-title text-center">
             <h2 class="block-title__title">Методичні об'єднання<br>
-                та структурні підрозділи вчителів</h2><!-- /.block-title__title -->
+                вчителів гімназії </h2><!-- /.block-title__title -->
         </div><!-- /.block-title -->
         <div class="course-category-one__carousel owl-carousel owl-theme">
             @foreach($mos as $mo)
@@ -14,7 +14,17 @@
 {{--                    </div><!-- /.course-category-one__icon -->--}}
                     <h3 class="course-category-one__title"
                     style="min-height:50px; font-size:16px"
-                    ><a href="#">{{$mo->name}}</a></h3>
+                    ><a href="{{url('mos/'.$mo->link)}}">{{$mo->name}}</a></h3>
+                    <div>
+                        <span>Предметів:</span>
+                        <span style="font-weight: bold;color: orange"
+                        title="@foreach($mo->subjects as $subject)&#013{{$subject->name}}@endforeach">{{$mo->subjects->count()}}</span>
+                    </div>
+                    <div>
+                        <span>Вчителів:</span>
+                        <span style="font-weight: bold;color: orange"
+                              title="@foreach($mo->teachers as $teacher)&#013{{$teacher->snp}}@endforeach">{{$mo->teachers->count()}}</span>
+                    </div>
                     <!-- /.course-category-one__title -->
                 </div><!-- /.course-category-one__single -->
             </div><!-- /.item -->
@@ -102,6 +112,6 @@
 {{--            </div><!-- /.item -->--}}
         </div><!-- /.course-category-one__carousel owl-carousel owl-theme -->
 
-        <a href="#" class="thm-btn">View All Categories</a><!-- /.thm-btn -->
+        <a href="/teachers/all" class="thm-btn">Переглянути всіх</a><!-- /.thm-btn -->
     </div><!-- /.container-fluid -->
 </section><!-- /.thm-gray-bg course-category-one -->

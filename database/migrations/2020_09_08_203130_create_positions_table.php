@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterMoteachersTable extends Migration
+class CreatePositionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AlterMoteachersTable extends Migration
      */
     public function up()
     {
-        Schema::table('mos', function (Blueprint $table) {
-            $table->string('image')->nullable()->after('active');
+        Schema::create('positions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AlterMoteachersTable extends Migration
      */
     public function down()
     {
-        Schema::table('mos', function (Blueprint $table) {
-            $table->dropColumn('image');
-        });
+        Schema::dropIfExists('positions');
     }
 }
