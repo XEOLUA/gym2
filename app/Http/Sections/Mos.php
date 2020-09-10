@@ -71,6 +71,7 @@ class Mos extends Section implements Initializable
             AdminColumn::count('teachers.id', 'Вчителів'),
             AdminColumn::count('subjects.id', 'Предметів'),
             AdminColumn::image('image', 'Зображення'),
+            AdminColumnEditable::text('link', 'Посилання'),
 //            AdminColumn::lists('teachers.snp', 'Вчителі'),
             AdminColumnEditable::checkbox('active', 'On'),
         ];
@@ -109,9 +110,7 @@ class Mos extends Section implements Initializable
                     AdminFormElement::checkbox('active', 'Активна'),
 //                    AdminFormElement::text('group', 'Група'),
                     AdminFormElement::html('<hr>'),
-                    AdminFormElement::datetime('created_at')
-                        ->setVisible(true)
-                        ->setReadonly(false)
+                    AdminFormElement::text('link')
                     ,
 
                 ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([

@@ -26,6 +26,9 @@ Auth::routes();
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/news', 'HomeController@news')->name('news');
+Route::get('/news/{slug}', 'HomeController@newstypes')->name('newstypes');
 Route::get('/statistics', 'HomeController@statistics')->name('statistics');
 Route::get('/page/{slug}', 'HomeController@page')->name('page');
+Route::get('/mos/{slug}', 'HomeController@mospage')->name('mospage');
+Route::get('/teachers/{id}', 'HomeController@teachers')->name('teachers');
 

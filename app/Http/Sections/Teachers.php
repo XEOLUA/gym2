@@ -8,6 +8,8 @@ use AdminColumnFilter;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
+use App\Position;
+use App\Subject;
 use App\Teacher;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
@@ -58,6 +60,7 @@ class Teachers extends Section implements Initializable
      */
     public function onDisplay($payload = [])
     {
+        $positions = Position::pluck('name','name')->toArray();
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
             AdminColumnEditable::text('snp', 'ПІБ')->setWidth('350px')
@@ -66,7 +69,10 @@ class Teachers extends Section implements Initializable
                         ->orWhere('snp', 'like', '%' . $search . '%');
                 }),
             AdminColumn::lists('mo.name', 'МО'),
+            AdminColumn::lists('subjects.name', 'Предмети'),
 //            AdminColumn::image('photo', 'Фото')->setWidth('10px'),
+            AdminColumnEditable::select('position', 'Посада', $positions)
+                ->setDisplay('Посада')->setWidth('120px'),
             AdminColumnEditable::select('sex', 'Стать', ['ч'=>'ч', 'ж'=>'ж'])
                 ->setDisplay('Стать'),
             AdminColumnEditable::checkbox('active','on')
@@ -91,32 +97,90 @@ class Teachers extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
-        $form = AdminForm::card()->addBody([
-            AdminFormElement::columns()->addColumn([
-                AdminFormElement::text('snp', 'ПІБ')
-                    ->required(),
-                AdminFormElement::text('sex', 'Стать')
-                    ->required(),
-                AdminFormElement::html('<hr>'),
-                AdminFormElement::datetime('created_at')
-                    ->setVisible(true)
-                    ->setReadonly(false)
-                ,
-                AdminFormElement::html('last AdminFormElement without comma')
-            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
-                AdminFormElement::text('id', 'ID')->setReadonly(true),
-                AdminFormElement::html('last AdminFormElement without comma')
-            ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
-        ]);
+
+        $subjects = Subject::pluck('name','id')->toArray();
+
+        $tabs = AdminDisplay::tabbed();
+
+        $tabs->setTabs(function ($id)use (&$subjects) {
+            $tabs = [];
+
+            $tabs[] = AdminDisplay::tab(AdminForm::elements([
+                AdminFormElement::columns()->addColumn([
+                    AdminFormElement::text('snp', 'Вчитель')->required(),
+                    AdminFormElement::image('photo', 'Фото'),
+                    AdminFormElement::checkbox('active', 'On'),
+//                    AdminFormElement::text('group', 'Група'),
+                    AdminFormElement::html('<hr>'),
+
+                ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
+                    AdminFormElement::text('id', 'ID')->setReadonly(true),
+
+                ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
+            ]))->setLabel('Вчитель')->setName('tab1');
+
+            $tabs[] = AdminDisplay::tab(new \SleepingOwl\Admin\Form\FormElements([
+                AdminFormElement::hasMany('teachings', [
+                    AdminFormElement::select('subject_id','Предмет')
+                        ->setOptions($subjects)
+                        ->required(),
+                ]),
+            ]))->setLabel('Предмети')->setName('tab2');
+
+//            $tabs[] = AdminDisplay::tab(new \SleepingOwl\Admin\Form\FormElements([
+//                AdminFormElement::hasMany('moforsubject', [
+//
+//                    AdminFormElement::select('subject_id','Предмет')
+//                        ->setOptions($subjects)
+//                        ->required(),
+//                ]),
+//            ]))->setLabel('Предмети')->setName('tab3');
+
+            return $tabs;
+        });
+
+        $form = AdminForm::card()
+            ->addHeader([
+                $tabs
+            ]);
+
+//        dd($form);
 
         $form->getButtons()->setButtons([
-            'save' => new Save(),
-            'save_and_close' => new SaveAndClose(),
-            'save_and_create' => new SaveAndCreate(),
-            'cancel' => (new Cancel()),
+            'save'  => new Save(),
+            'save_and_close'  => new SaveAndClose(),
+            'save_and_create'  => new SaveAndCreate(),
+            'cancel'  => (new Cancel()),
         ]);
 
         return $form;
+
+//        $form = AdminForm::card()->addBody([
+//            AdminFormElement::columns()->addColumn([
+//                AdminFormElement::text('snp', 'ПІБ')
+//                    ->required(),
+//                AdminFormElement::text('sex', 'Стать')
+//                    ->required(),
+//                AdminFormElement::html('<hr>'),
+//                AdminFormElement::datetime('created_at')
+//                    ->setVisible(true)
+//                    ->setReadonly(false)
+//                ,
+//                AdminFormElement::html('last AdminFormElement without comma')
+//            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
+//                AdminFormElement::text('id', 'ID')->setReadonly(true),
+//                AdminFormElement::html('last AdminFormElement without comma')
+//            ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
+//        ]);
+//
+//        $form->getButtons()->setButtons([
+//            'save' => new Save(),
+//            'save_and_close' => new SaveAndClose(),
+//            'save_and_create' => new SaveAndCreate(),
+//            'cancel' => (new Cancel()),
+//        ]);
+//
+//        return $form;
     }
 
     /**

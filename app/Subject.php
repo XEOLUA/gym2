@@ -20,4 +20,14 @@ class Subject extends Model
     {
         return $this->belongsToMany('App\Mo','subjectinmos');
     }
+
+    public function subjectforteacher()
+    {
+        return $this->hasMany('App\Teaching', 'teacher_id', 'id');
+    }
+
+    public function teachers()
+    {
+        return $this->belongsToMany('App\Teacher','teachings');
+    }
 }

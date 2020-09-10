@@ -28,7 +28,7 @@
                     <div class="col-xl-12">
                         <h3 class="banner-one__title banner-one__light-color">У нас<br>
                             вчаться</h3><!-- /.banner-one__title -->
-                        <p class="banner-one__tag-line">а ви готові вчитися?</p><!-- /.banner-one__tag-line -->
+                        <p class="banner-one__tag-line">а ви готові?</p><!-- /.banner-one__tag-line -->
                         <a href="{{url('page/fellows')}}" class="thm-btn banner-one__btn">Дізнатися більше</a>
                     </div><!-- /.col-xl-12 -->
                 </div><!-- /.row -->
