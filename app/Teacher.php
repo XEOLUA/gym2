@@ -46,6 +46,11 @@ class Teacher extends Eloquent
         return $this->belongsToMany('App\Subject','teachings');
     }
 
+    public function teacherspages()
+    {
+        return $this->hasMany('App\Teacherspage', 'teacher_id', 'id');
+    }
+
 //    public function teacherforsubject()
 //    {
 //        return $this->hasMany('App\Teacherinmo', 'mo_id', 'id');

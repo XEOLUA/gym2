@@ -70,7 +70,10 @@ class Menus extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
-        $menuList = Menu::pluck('title','id')->toArray();
+        $menuList = Menu::all()->keyBy('id')->toArray();
+        foreach ($menuList as $key => $val){
+            $menuList[$key]=$menuList[$key]['title']=$val['title'].' '.$val['block_id'];
+        }
         $menuList[0] = 'root';
 
         $form = AdminForm::panel();

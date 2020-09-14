@@ -60,7 +60,7 @@ class Teachers extends Section implements Initializable
      */
     public function onDisplay($payload = [])
     {
-        $positions = Position::pluck('name','name')->toArray();
+        $positions = Position::pluck('name','id')->toArray();
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
             AdminColumnEditable::text('snp', 'ПІБ')->setWidth('350px')
