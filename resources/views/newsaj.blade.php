@@ -1,20 +1,4 @@
 
-@extends('layouts.app')
-
-@section('title','Новини')
-
-@section('content')
-
-    <div class="page-wrapper">
-    @include('home.preloader')
-    @include('home.topbar-one')
-    @include('home.header')
-
-<div style="padding: 20px; text-align: center; line-height: normal">
-    <h2>Новини гімназії №2</h2>
-           <div style="display:flex;flex-wrap:wrap;
-           justify-content: center;
-           " id="newses-list">
             @foreach($news as $new)
                <a href="{{url('new/'.$new->id)}}">
                 <div style="margin: 0px 0px 50px 0px">
@@ -41,12 +25,3 @@
                 </div>
                </a>
             @endforeach
-            </div>
-    <a class="course-one__link" id="btnShowMoreNewses" style="cursor:pointer">Переглянути більше</a>
-</div>
-
-    @include('home.footer')
-
-    </div><!-- /.page-wrapper -->
-
-@endsection

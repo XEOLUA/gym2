@@ -1,8 +1,6 @@
 <!-- Price box minimal--><!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
 <head>
-
-    <title>Гімназія №2 м.Хмельницький</title>
     <link rel="apple-touch-icon" sizes="180x180" href="{{url('assets/images/favicons/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{url('assets/images/favicons/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{url('assets/images/favicons/favicon-16x16.png')}}">
@@ -22,10 +20,6 @@
     <!-- template styles -->
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/responsive.css')}}">
-
-
-
-
 
     <title>{{ config('app.name', 'XEOL') }} | @yield('title','XEOL')</title>
     <meta charset="utf-8">
@@ -122,6 +116,40 @@
 
 <!-- template scripts -->
 <script src="{{url('assets/js/theme.js')}}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        let container = document.getElementById('News-list');
+        let btn = document.getElementById('btnShowMoreNewses');
+        let cnt = 1;
+
+        function fetch_data(page){
+            $.ajax({
+                url:location+"/fetch_data?page="+page,
+                success:function(data){
+
+                    if(data!='empty'){
+                        $('#newses-list').append(data);
+                        console.log(data);
+                    }
+                    else {
+                        btn.style.display='none';
+                         console.log(data);
+                    }
+                }
+            });
+        }
+
+        if(btn!=null)
+            btn.onclick = function(e){
+                fetch_data(++cnt);
+                console.log(cnt);
+            }
+    });
+
+
+
+</script>
 
 </body>
 </html>

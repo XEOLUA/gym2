@@ -104,11 +104,14 @@ class Newses extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
+        $newstypes = Newstype::where('active',1)->orderBy('order')->get()->pluck('name','id')->toArray();
+
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()->addColumn([
                 AdminFormElement::text('title', 'Заголовок')
                     ->required()
                 ,
+                AdminFormElement::ckeditor('description','Текст новини'),
                 AdminFormElement::html('<hr>'),
                 AdminFormElement::datetime('created_at')
                     ->setVisible(true)
@@ -117,7 +120,10 @@ class Newses extends Section implements Initializable
                 AdminFormElement::html('last AdminFormElement without comma')
             ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8')->addColumn([
                 AdminFormElement::text('id', 'ID')->setReadonly(true),
-                AdminFormElement::image('image','Зображення')
+                AdminFormElement::image('image','Зображення'),
+                AdminFormElement::text('author','Автор')->required(),
+                AdminFormElement::select('newstype_id', 'Рубрика')
+                    ->setOptions($newstypes)
             ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4'),
         ]);
 

@@ -4,61 +4,43 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-6 col-sm-12">
-                    <div class="footer-widget footer-widget__contact">
-                        <h2 class="footer-widget__title">Courses</h2><!-- /.footer-widget__title -->
-                        <ul class="list-unstyled footer-widget__course-list">
-                            <li>
-                                <h2><a href="course-details.html">Introduction Web Design</a></h2>
-                                <p>Mike Hardson</p>
-                            </li>
-                            <li>
-                                <h2><a href="course-details.html"> Learning MBA Management </a></h2>
-                                <p>Jessica Brown</p>
-                            </li>
-                        </ul><!-- /.footer-widget__course-list -->
+                    <div class="footer-widget footer-widget__contact" style="color:#ffffff">
+                        <h2 class="footer-widget__title">{{$footer_block_0->item('m6')->title}}</h2>
+                        <div class="footer-widget__link-wrap">
+                            <ul class="list-unstyled footer-widget__link-list">
+                                @include('custom-menu-items', ['items' => Menu::get('footer_block_0')->item('m6')->children()])
+                            </ul>
+                        </div>
+                    </div><!-- /.footer-widget -->
+                </div><!-- /.col-lg-3 -->
+                <div class="col-xl-3 col-lg-6 col-sm-12">
+                    <div class="footer-widget footer-widget__contact" style="color:#ffffff">
+                        <h2 class="footer-widget__title">{{$footer_block_1->item('m33')->title}}</h2>
+                        <div class="footer-widget__link-wrap">
+                        <ul class="list-unstyled footer-widget__link-list">
+                            @include('custom-menu-items', ['items' => Menu::get('footer_block_1')->item('m33')->children()])
+                        </ul>
+                        </div>
                     </div><!-- /.footer-widget -->
                 </div><!-- /.col-lg-3 -->
                 <div class="col-xl-3 col-lg-6 col-sm-12">
                     <div class="footer-widget footer-widget__link">
-                        <h2 class="footer-widget__title">Explore</h2><!-- /.footer-widget__title -->
+                        <h2 class="footer-widget__title">{{$footer_block_2->item('m43')->title}}</h2><!-- /.footer-widget__title -->
                         <div class="footer-widget__link-wrap">
                             <ul class="list-unstyled footer-widget__link-list">
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Overview</a></li>
-                                <li><a href="#">Teachers</a></li>
-                                <li><a href="#">Join Us</a></li>
-                                <li><a href="#">Our News</a></li>
-                            </ul><!-- /.footer-widget__link-list -->
-                            <ul class="list-unstyled footer-widget__link-list">
-                                <li><a href="#">Help </a></li>
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">Register Now</a></li>
+                                @include('custom-menu-items', ['items' => Menu::get('footer_block_2')->item('m43')->children()])
                             </ul><!-- /.footer-widget__link-list -->
                         </div><!-- /.footer-widget__link-wrap -->
                     </div><!-- /.footer-widget -->
                 </div><!-- /.col-lg-3 -->
                 <div class="col-xl-3 col-lg-6 col-sm-12">
-                    <div class="footer-widget footer-widget__gallery">
-                        <h2 class="footer-widget__title">Gallery</h2><!-- /.footer-widget__title -->
-                        <ul class="list-unstyled footer-widget__gallery-list">
-                            <li><a href="#"><img src="assets/images/footer-1-1.png" alt=""></a></li>
-                            <li><a href="#"><img src="assets/images/footer-1-2.png" alt=""></a></li>
-                            <li><a href="#"><img src="assets/images/footer-1-3.png" alt=""></a></li>
-                            <li><a href="#"><img src="assets/images/footer-1-4.png" alt=""></a></li>
-                            <li><a href="#"><img src="assets/images/footer-1-5.png" alt=""></a></li>
-                            <li><a href="#"><img src="assets/images/footer-1-6.png" alt=""></a></li>
-                        </ul><!-- /.footer-widget__gallery -->
-                    </div><!-- /.footer-widget -->
-                </div><!-- /.col-lg-3 -->
-                <div class="col-xl-3 col-lg-6 col-sm-12">
                     <div class="footer-widget footer-widget__about">
-                        <h2 class="footer-widget__title">About</h2><!-- /.footer-widget__title -->
-                        <p class="footer-widget__text">Lorem ipsum dolor sit ametcon, sectetur adipiscing elit.
-                            Phasellus vehic sagittis euismod.</p><!-- /.footer-widget__text -->
-                        <div class="footer-widget__btn-block">
-                            <a href="#" class="thm-btn">Contact</a><!-- /.thm-btn -->
-                            <a href="#" class="thm-btn">Purchase</a><!-- /.thm-btn -->
-                        </div><!-- /.footer-widget__btn-block -->
+                        <h2 class="footer-widget__title">Про нас</h2><!-- /.footer-widget__title -->
+                        <p class="footer-widget__text">Моя гімназія - моя гордість і честь</p><!-- /.footer-widget__text -->
+{{--                        <div class="footer-widget__btn-block">--}}
+{{--                            <a href="#" class="thm-btn">Contact</a><!-- /.thm-btn -->--}}
+{{--                            <a href="#" class="thm-btn">Purchase</a><!-- /.thm-btn -->--}}
+{{--                        </div><!-- /.footer-widget__btn-block -->--}}
                     </div><!-- /.footer-widget -->
                 </div><!-- /.col-lg-3 -->
             </div><!-- /.row -->
@@ -66,13 +48,13 @@
     </div><!-- /.site-footer__upper -->
     <div class="site-footer__bottom">
         <div class="container">
-            <p class="site-footer__copy">&copy; Copyright 2019 by <a href="#">Layerdrops.com</a></p>
+            <p class="site-footer__copy">&copy; Copyright 2020 by <a href="http://xeol.com.ua">XEOL</a></p>
             <div class="site-footer__social">
                 <a href="#" data-target="html" class="scroll-to-target site-footer__scroll-top"><i class="kipso-icon-top-arrow"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+{{--                <a href="#"><i class="fab fa-twitter"></i></a>--}}
                 <a href="#"><i class="fab fa-facebook-square"></i></a>
-                <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+{{--                <a href="#"><i class="fab fa-pinterest-p"></i></a>--}}
+{{--                <a href="#"><i class="fab fa-instagram"></i></a>--}}
             </div><!-- /.site-footer__social -->
             <!-- /.site-footer__copy -->
         </div><!-- /.container -->

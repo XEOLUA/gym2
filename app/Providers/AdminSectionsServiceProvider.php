@@ -17,6 +17,7 @@ use App\Position;
 use App\Subject;
 use App\Teacher;
 use App\Teacherinmo;
+use App\Teacherspage;
 use App\User;
 use SleepingOwl\Admin\Admin;
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;

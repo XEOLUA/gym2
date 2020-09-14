@@ -25,10 +25,18 @@ Route::get('/', 'HomeController@index')->name('index');
 Auth::routes();
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/newstype/{slug}', 'HomeController@newstype')->name('newstype');
 Route::get('/news', 'HomeController@news')->name('news');
-Route::get('/news/{slug}', 'HomeController@newstypes')->name('newstypes');
+Route::get('/news/fetch_data', 'HomeController@newsaj')->name('newsaj');
+Route::get('/newstype/{slug}/fetch_data', 'HomeController@newstypeaj')->name('newstypeaj');
+Route::get('/new/{id}', 'HomeController@newsone')->name('newsone');
 Route::get('/statistics', 'HomeController@statistics')->name('statistics');
 Route::get('/page/{slug}', 'HomeController@page')->name('page');
 Route::get('/mos/{slug}', 'HomeController@mospage')->name('mospage');
 Route::get('/teachers/{id}', 'HomeController@teachers')->name('teachers');
+Route::prefix('/teachers/page/')->group(function () {
+    Route::get('{teacher_id}', 'HomeController@teacherspages')->name('teacherspages');
+    Route::get('{teacher_id}/{page}', 'HomeController@teacherspages')->name('teacherspages');
+});
+
 

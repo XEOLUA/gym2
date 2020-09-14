@@ -7,7 +7,7 @@
         </div><!-- /.topbar-one__left -->
         <div class="topbar-one__right">
             @if(!auth()->check())
-                    <a class="nav-link btn_registr" href="{{route('register')}}">Реєстрація</a>
+{{--                    <a class="nav-link btn_registr" href="{{route('register')}}">Реєстрація</a>--}}
                     <a class="nav-link" href="{{route('login')}}">Вхід</a>
             @else
                 <li>

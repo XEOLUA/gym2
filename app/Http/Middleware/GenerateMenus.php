@@ -44,57 +44,71 @@ class GenerateMenus
                 }
             }
 
-//            foreach($groupsItems as $key => $group) {
-//                if($key==0)
-//                $menu->add($items[$key]->title, ['url' => $group->link])->nickname('m' . $group->id)->id($group->id);
-//                foreach ($group as $v) {
-//                    $menu->get("m" . $v->parent_id)->add($v->title . " order=" . $v->order . " id=" . $v->id,
-//                        ['url' => $v->link])->nickname('m' . $v->id)->id($v->id);
-//                }
-//            }
-
-//           $items = Menu::where('block_id',0)->where('active',1)->get()->sortBy(['order'])->keyBy('id');
-
-
-
-//            foreach ($items as $item) {
-//                if ($item->parent_id==0) {
-//                    $menu->add($item->title, ['url' => $item->link])->nickname('m'.$item->id)->id($item->id);
-//                    $items->forget($item->id);
-//                }
-//            }
-//            $items = $items->sortBy(['parent_id','order']);
-//            while(!$items->isEmpty()){
-//                $items = $items->sortBy(['parent_id', 'order']);
-//                foreach ($items as $item) {
-//                    if($menu->get("m".$item->parent_id))  {
-//                        $menu->get("m".$item->parent_id)->add($item->title." order=".$item->order." id=".$item->id,
-//                            ['url' => $item->link])->nickname('m'.$item->id)->id($item->id);
-//                        $items->forget($item->id);
-//                    }
-//                }
-//
-//            }
         });
 
-//        \Menu::make('menu1', function ($menu) {
-//
-//            $items = Menu::where('block_id',1)->get()->sortBy('order');
-//
-////            dd($items);
-//
-//            foreach ($items as $item) {
-//
-//                if(is_null($item->parent_id) || $item->parent_id==0){
-//                    $menu->add($item->title,$item->link)->nickname('m'.$item->id);
-//                }
-//                else{
-//                    $parent = 'm'.$item->parent_id;
-//                    $menu->get($parent)->add($item->title,$item->link)->nickname('m'.$item->id);
-//                }
-//            }}
-//
-//        );
+        \Menu::make('footer_block_0', function ($menu) {
+
+            $parent_block = Menu::where('block_id',0)
+                ->where('id',6)->get()[0];
+
+            $items = Menu::where('block_id',0)
+                ->where('active',1)
+                ->where('parent_id',$parent_block->id)
+                ->get()
+                ->sortBy('order')
+                ->keyBy('id')
+            ;
+
+            $menu->add($parent_block->title,$parent_block->link)->nickname('m'.$parent_block->id);
+
+            foreach ($items as $item) {
+                $parent = 'm'.$item->parent_id;
+                $menu->get($parent)->add($item->title,$item->link)->nickname('m'.$item->id);
+            }
+        });
+
+        \Menu::make('footer_block_1', function ($menu) {
+
+            $parent_block = Menu::where('block_id',0)
+                ->where('id',33)->get()[0];
+
+            $items = Menu::where('block_id',0)
+                ->where('active',1)
+                ->where('parent_id',$parent_block->id)
+                ->get()
+                ->sortBy('order')
+                ->keyBy('id')
+            ;
+
+            $menu->add($parent_block->title,$parent_block->link)->nickname('m'.$parent_block->id);
+
+            foreach ($items as $item) {
+                    $parent = 'm'.$item->parent_id;
+                    $menu->get($parent)->add($item->title,$item->link)->nickname('m'.$item->id);
+            }
+        });
+
+
+        \Menu::make('footer_block_2', function ($menu) {
+
+            $parent_block = Menu::where('block_id',0)
+                ->where('id',43)->get()[0];
+
+            $items = Menu::where('block_id',0)
+                ->where('active',1)
+                ->where('parent_id',$parent_block->id)
+                ->get()
+                ->sortBy('order')
+                ->keyBy('id')
+            ;
+
+            $menu->add($parent_block->title,$parent_block->link)->nickname('m'.$parent_block->id);
+
+            foreach ($items as $item) {
+                $parent = 'm'.$item->parent_id;
+                $menu->get($parent)->add($item->title,$item->link)->nickname('m'.$item->id);
+            }
+        });
 
         return $next($request);
     }

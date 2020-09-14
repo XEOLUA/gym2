@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 
-@section('title','Index')
+@section('title','Головна')
 
 @section('content')
 
@@ -20,7 +20,7 @@
     @include('home.brand-two')
     @include('home.blog-two')
     @include('home.cta-four')
-    @include('home.mailchimp-one')
+{{--    @include('home.mailchimp-one')--}}
     @include('home.search-popup')
     @include('home.footer')
 
