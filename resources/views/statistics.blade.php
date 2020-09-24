@@ -9,8 +9,9 @@
     @include('home.preloader')
     @include('home.topbar-one')
     @include('home.header')
-        <div style="display:flex;flex-wrap:wrap">
-        <table style="line-height: 25px;border:1px solid silver;width:50%">
+        <div style="display:flex;flex-wrap:wrap;">
+        <table style="line-height: 25px;border:1px solid silver;width:48%; margin-left: auto; margin-right: auto; margin-top: 20px;">
+            <tr><th colspan="5" style="text-align: center; background: #7a8793;color: #ffffff">Учні</th></tr>
             <tr>
                 <th>М</th>
                 <th>ПІБ</th>
@@ -36,7 +37,8 @@
                 @php $prev=$val; @endphp
             @endforeach
         </table>
-            <table style="line-height: 25px;border:1px solid silver;width:50%">
+            <table style="line-height: 25px;border:1px solid silver;width:48%; margin-right: auto; margin-left: auto; margin-top: 20px;">
+                <tr><th colspan="5" style="text-align: center; background: #7a8793;color: #ffffff">Вчителі</th></tr>
                 <tr>
                     <th>М</th>
                     <th>ПІБ</th>

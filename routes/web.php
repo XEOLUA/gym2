@@ -22,7 +22,7 @@ Route::get('/', 'HomeController@index')->name('index');
 //
 //});
 
-Auth::routes();
+
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/newstype/{slug}', 'HomeController@newstype')->name('newstype');
@@ -38,5 +38,13 @@ Route::prefix('/teachers/page/')->group(function () {
     Route::get('{teacher_id}', 'HomeController@teacherspages')->name('teacherspages');
     Route::get('{teacher_id}/{page}', 'HomeController@teacherspages')->name('teacherspages');
 });
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('/arm/')->group(function () {
+        Route::get('pupils', 'PupilController@pupilslist')->name('pupilslist');
+        Route::get('pupils/fetchdata', 'PupilController@pupillistaj')->name('pupillistaj');
+        Route::get('pupil/edit/{id}', 'PupilController@editpupil')->name('editpupil');
+        Route::post('pupil/save', 'PupilController@savepupil')->name('savepupil');
+    });
+});
 
-
+Auth::routes();

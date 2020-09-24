@@ -3,10 +3,14 @@
 namespace App\Http\Sections;
 
 use AdminColumn;
+use AdminColumnEditable;
 use AdminColumnFilter;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
+use App\Providers\RouteServiceProvider;
+use App\Role;
+use App\Teacher;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
@@ -56,27 +60,26 @@ class Users extends Section implements Initializable
      */
     public function onDisplay($payload = [])
     {
+        $teachers = Teacher::pluck('snp','id')->toArray();
+        $roles = Role::pluck('name','id')->toArray();
+
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumn::link('name', 'Name', 'created_at')
+            AdminColumnEditable::text('name', 'Name', 'created_at')
                 ->setSearchCallback(function($column, $query, $search){
                     return $query
                         ->orWhere('name', 'like', '%'.$search.'%')
-                        ->orWhere('created_at', 'like', '%'.$search.'%')
                     ;
-                })
-                ->setOrderable(function($query, $direction) {
-                    $query->orderBy('created_at', $direction);
-                })
-            ,
-            AdminColumn::boolean('name', 'On'),
-            AdminColumn::text('created_at', 'Created / updated', 'updated_at')
-                ->setWidth('160px')
-                ->setOrderable(function($query, $direction) {
-                    $query->orderBy('updated_at', $direction);
-                })
-                ->setSearchable(false)
-            ,
+                }),
+            AdminColumnEditable::text('email','email'),
+            AdminColumnEditable::select('teacher_id','Вчитель')
+            ->setOptions($teachers)
+            ->setLabel('Вчитель'),
+            AdminColumnEditable::select('role','Роль')
+            ->setOptions($roles)
+            ->setLabel('Роль'),
+            AdminColumnEditable::checkbox('status','On')
+
         ];
 
         $display = AdminDisplay::datatables()
@@ -85,21 +88,7 @@ class Users extends Section implements Initializable
             ->setDisplaySearch(true)
             ->paginate(25)
             ->setColumns($columns)
-            ->setHtmlAttribute('class', 'table-primary table-hover th-center')
         ;
-
-        $display->setColumnFilters([
-            AdminColumnFilter::select()
-                ->setModelForOptions(\App\User::class, 'name')
-                ->setLoadOptionsQueryPreparer(function($element, $query) {
-                    return $query;
-                })
-                ->setDisplay('name')
-                ->setColumnName('name')
-                ->setPlaceholder('All names')
-            ,
-        ]);
-        $display->getColumnFilters()->setPlacement('card.heading');
 
         return $display;
     }
@@ -112,11 +101,27 @@ class Users extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
+        $teachers = Teacher::pluck('snp','id')->toArray();
+        $roles = Role::pluck('name','id')->toArray();
+
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()->addColumn([
                 AdminFormElement::text('name', 'Name')
                     ->required()
                 ,
+                AdminFormElement::text('email','email'),
+                AdminFormElement::password('password','Пароль')
+                    ->hashWithBcrypt()
+                    ->required()
+//                    ->setDefaultValue(bcrypt('qwerty'))
+                ->setLabel('Пароль'),
+                AdminFormElement::select('teacher_id','Вчитель')
+                    ->setOptions($teachers)
+                    ->setLabel('Вчитель'),
+                AdminFormElement::select('role','Роль')
+                    ->setOptions($roles)
+                    ->setLabel('Роль')
+                    ->setDefaultValue(2),
                 AdminFormElement::html('<hr>'),
                 AdminFormElement::datetime('created_at')
                     ->setVisible(true)

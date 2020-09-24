@@ -9,8 +9,8 @@ use AdminDisplay;
 use AdminDisplayFilter;
 use AdminForm;
 use AdminFormElement;
-use App\Olympstatistic;
-use App\Subject;
+use App\Classe;
+use App\Pupil;
 use App\Teacher;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
@@ -23,13 +23,13 @@ use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 use SleepingOwl\Admin\Section;
 
 /**
- * Class Olympstatistics
+ * Class Pupils
  *
- * @property \App\Olympstatistic $model
+ * @property \App\Pupil $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Olympstatistics extends Section implements Initializable
+class Pupils extends Section implements Initializable
 {
     /**
      * @var bool
@@ -39,7 +39,7 @@ class Olympstatistics extends Section implements Initializable
     /**
      * @var string
      */
-    protected $title='Олімпіади';
+    protected $title="Учні";
 
     /**
      * @var string
@@ -51,7 +51,7 @@ class Olympstatistics extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('far fa-hand-peace');
+        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-user-graduate');
     }
 
     /**
@@ -61,50 +61,41 @@ class Olympstatistics extends Section implements Initializable
      */
     public function onDisplay($payload = [])
     {
-        $teachers = Teacher::pluck('snp','id')->toArray();
-        $subjects = Subject::pluck('name','id')->toArray();
-        $columns = [
-            AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumnEditable::text('pupil', 'Учень')
-                ->setSearchCallback(function($column, $query, $search){
-                    return $query
-                        ->orWhere('pupil', 'like', '%'.$search.'%')
-                    ;
-                }),
-            AdminColumnEditable::select('teacher_id')->setLabel('Наставник')
-                ->setOptions($teachers)
-                ->setDisplay('Наставник')
-                ->setTitle('Оберіть наставника')
-                ->append(AdminColumn::filter('teacher_id'))
-            ,
-            AdminColumnEditable::select('subject_id')->setLabel('Предмет')
-                ->setOptions($subjects)
-                ->setDisplay('Предмет')
-                ->setTitle('Оберіть предмет')
+        $classes = Classe::with('teachers')->get()->keyBy('id');
+        $cl = $classes->pluck('name','id')->toArray();
 
+        $columns = [
+            AdminColumn::text('id', '#')->setWidth('50px'),
+            AdminColumnEditable::text('snp', 'ПІБ')
+                ->setOrderable(function($query, $direction) {
+                    $query->orderBy('snp', $direction);
+                }),
+            AdminColumnEditable::select('class_id')
+            ->setOptions($cl)
+            ->setLabel('Клас')
+            ->append(AdminColumn::filter('class_id'))
             ,
-            AdminColumnEditable::text('level','Етап')
-            ->append(AdminColumn::filter('level')),
-            AdminColumnEditable::text('position','Місце')
-            ->append(AdminColumn::filter('position')),
-            AdminColumnEditable::text('year','Рік'),
+            AdminColumn::custom('Керівник',function (\App\Pupil $model)use(&$classes){
+                return $classes[$model->class_id]->teachers->snp;
+            }),
+
+            AdminColumnEditable::checkbox('archive','Вибув')
         ];
 
         $display = AdminDisplay::datatables()
             ->setName('firstdatatables')
-            ->setOrder([[0, 'asc']])
+//            ->setOrder([[1, 'asc']])
+//            ->setApply(function ($query) {
+//                $query->orderBy('snp');
+//            })
             ->setDisplaySearch(true)
-            ->paginate(25)
+            ->paginate(40)
             ->setColumns($columns)
         ;
 
         $display->setFilters(
-            AdminDisplayFilter::related('teacher_id','Наствник')->setModel(Teacher::class),
-            AdminDisplayFilter::related('subject_id','Предмет')->setModel(Subject::class),
-            AdminDisplayFilter::related('position','Місце')->setModel(Olympstatistic::class),
-            AdminDisplayFilter::related('level','Етап')->setModel(Olympstatistic::class)
+            AdminDisplayFilter::related('class_id','Клас')->setModel(Classe::class)
         );
-
 
         return $display;
     }

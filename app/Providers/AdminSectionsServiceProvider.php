@@ -14,6 +14,8 @@ use App\Newstype;
 use App\Olympstatistic;
 use App\Page;
 use App\Position;
+use App\Pupil;
+use App\Socialgroup;
 use App\Subject;
 use App\Teacher;
 use App\Teacherinmo;
@@ -40,6 +42,8 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Teacher::class => 'App\Http\Sections\Teachers',
         Position::class => 'App\Http\Sections\Positions',
         Classe::class => 'App\Http\Sections\Classes',
+        Pupil::class => 'App\Http\Sections\Pupils',
+        Socialgroup::class => 'App\Http\Sections\Socialgroups',
         Cabinet::class => 'App\Http\Sections\Cabinets',
         Subject::class => 'App\Http\Sections\Subjects',
         Olympstatistic::class => 'App\Http\Sections\Olympstatistics',
