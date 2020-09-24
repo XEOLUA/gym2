@@ -22,17 +22,20 @@ class AdminAuthenticate
 
 //        dd(auth()->user()->role);
 
-        if(Auth::check() && auth()->user()->role == 1) {
+        if(Auth::check() && auth()->user()->role == 2) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
+
                 return redirect()->guest('login');
             }
         }
 
-        if (Auth::check() && !(auth()->user()->role == 0)) {
+        if (Auth::check() && !(auth()->user()->role == 1)) {
             return response('Access denied.', 401);
         }
+
+//        dd(Auth::check() && auth()->user()->role == 1);
 
         return $next($request);
     }

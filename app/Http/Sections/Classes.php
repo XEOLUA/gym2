@@ -64,7 +64,7 @@ class Classes extends Section implements Initializable
 
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumn::link('name', 'Name', 'created_at')
+            AdminColumnEditable::text('name', 'Name', 'created_at')
                 ->setSearchCallback(function($column, $query, $search){
                     return $query
                         ->orWhere('name', 'like', '%'.$search.'%');
@@ -80,6 +80,7 @@ class Classes extends Section implements Initializable
                 ->setTitle('Оберіть кабінет')
                 ->append(AdminColumn::relatedLink('cabinets.id'))
             ,
+            AdminColumn::count('pupils')->setLabel('Учнів'),
         ];
 
         $display = AdminDisplay::datatables()

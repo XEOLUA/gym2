@@ -14,4 +14,9 @@ class Classe extends Model
     {
         return $this->belongsTo('App\Cabinet','cabinet_id','id');
     }
+    public function pupils()
+    {
+        return $this->hasMany('App\Pupil', 'class_id', 'id');
+    }
+
 }

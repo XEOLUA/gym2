@@ -56,53 +56,6 @@
 <script src="{{url('js/core.min.js')}}"></script>
 <script src="{{url('js/script.js')}}"></script>
 <script defer src="https://www.google.com/recaptcha/api.js" async></script>
-
-{{--<script type="text/javascript">--}}
-{{--    $(document).ready(function() {--}}
-{{--        $('.btnSubmit').click(function(event){--}}
-{{--            event.preventDefault();--}}
-{{--            $.ajax({--}}
-{{--                type:"POST",--}}
-{{--                url:"/subscribe/",--}}
-{{--                data: $("#formSubscribe").serialize(),--}}
-{{--                success: function(data){--}}
-{{--                    // console.log('Ajax responded');--}}
-{{--                    // console.log(data);--}}
-{{--                    if(data.errors_sc) {--}}
-{{--                        document.getElementById('errorAjax').innerHTML='';--}}
-{{--                        document.getElementById('errorAjax').style.display='block';--}}
-{{--                        // console.log('errors validation');--}}
-{{--                        // console.log(data.errors_sc);--}}
-{{--                        for(let key in data.errors_sc)--}}
-{{--                        {--}}
-{{--                            // console.log(key);--}}
-{{--                            document.getElementById('errorAjax').innerHTML+='<div>'+data.errors_sc[key]+'</div>';--}}
-{{--                        };--}}
-{{--                        // grecaptcha.reset();--}}
-{{--                    } else--}}
-{{--                    {--}}
-{{--                        // console.log('NOT errors validation');--}}
-{{--                        document.getElementById('errorAjax').innerHTML='';--}}
-{{--                        document.getElementById('errorAjax').style.display='block';--}}
-{{--                        document.getElementById('errorAjax').innerHTML+='Дякуємо за підписку.';--}}
-{{--                        // $('#addMember').modal('hide');--}}
-{{--                        // window.location.href = '/successAddQueryPartner';--}}
-{{--                    }--}}
-{{--                },--}}
-{{--                error: function (data) {--}}
-{{--                    // console.log(111);--}}
-{{--                    // console.log("777".data);--}}
-{{--                    // $("#emailm").css('color','#fc0059').html(data.responseJSON.errors.email);--}}
-{{--                    // console.log("data.responseJSON);--}}
-{{--                    // console.log('Ajax not responded');--}}
-{{--                }--}}
-{{--            });--}}
-{{--        });--}}
-{{--    });--}}
-
-{{--</script>--}}
-
-
 <script src="{{url('assets/js/jquery.min.js')}}"></script>
 <script src="{{url('assets/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{url('assets/js/owl.carousel.min.js')}}"></script>
@@ -117,20 +70,28 @@
 <!-- template scripts -->
 <script src="{{url('assets/js/theme.js')}}"></script>
 
+<script src="{{asset('tiac/src/jquery.tagsinput-revisited.js')}}"></script>
+<link rel="stylesheet" href="{{asset('tiac/src/jquery.tagsinput-revisited.css')}}">
+
 <script type="text/javascript">
     $(document).ready(function() {
+
+        $('#filter').tagsInput();
+        $('#filter_sex').tagsInput();
+        $('#filter_year').tagsInput();
+
         let container = document.getElementById('News-list');
         let btn = document.getElementById('btnShowMoreNewses');
         let cnt = 1;
 
-        function fetch_data(page){
+        function fetchdata(page){
             $.ajax({
                 url:location+"/fetch_data?page="+page,
                 success:function(data){
 
                     if(data!='empty'){
                         $('#newses-list').append(data);
-                        console.log(data);
+                        // console.log(data);
                     }
                     else {
                         btn.style.display='none';
@@ -142,14 +103,264 @@
 
         if(btn!=null)
             btn.onclick = function(e){
-                fetch_data(++cnt);
+                fetchdata(++cnt);
                 console.log(cnt);
             }
+
     });
+        let btnRebuild=document.getElementById('rebuild');
+        let countPupilsOnPage=15;
+        let timerStart = Date.now();
+        let classeslist = document.getElementById('classeslist');
+        let sex = document.getElementById('sex');
+        let snp = document.getElementById('snp');
+        let dt = document.getElementById('dt');
+        let timer = 0;
+
+        let column_id = document.getElementById('column_id');
+        let column_alpha = document.getElementById('column_alpha');
+        let column_snp = document.getElementById('column_snp');
+        let column_class = document.getElementById('column_class');
+        let column_sex = document.getElementById('column_sex');
+        let column_dt = document.getElementById('column_dt');
+        let column_teacher = document.getElementById('column_teacher');
+        let column_contact = document.getElementById('column_contact');
+        let column_address = document.getElementById('column_address');
+        let column_social_group = document.getElementById('column_social_group');
+        let field_sort = document.getElementById('field_sort');
+
+        let ar_col = {};
+        ar_col['id']=true;
+        ar_col['alpha']=true;
+        ar_col['snp']=true;
+        ar_col['class']=true;
+        ar_col['sex']=false;
+        ar_col['dt']=false;
+        ar_col['contact']=false;
+        ar_col['teacher']=false;
+        ar_col['address']=false;
+        ar_col['social_group']=false;
+
+        classeslist.oninput = function (e){
+            $('#filter').addTag(this.value);
+        }
+
+        sex.oninput = function (e){
+            $('#filter_sex').addTag(this.value);
+        }
+
+        dt.oninput = function (e){
+            $('#filter_year').addTag(this.value);
+        }
+
+        snp.oninput = function (e){
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+                fetch_data(1);
+            }, 1000);
+        }
+
+        btnRebuild.onclick = function(e){
+            timerStart = Date.now();
+            countPupilsOnPage=1*document.getElementById('countPupilsOnPage').innerText;
+            fetch_data(1);
+        }
+
+        $(document).on('click','.pagination a', function(event){
+            timerStart = Date.now();
+            event.preventDefault();
+            let page=$(this).attr('href').split('page=')[1];
+            fetch_data(page);
+        });
+
+        // show/hidden columns
+
+        column_id.onclick = function (e){
+            if(this.checked)
+                $(".col_id").removeClass("col_off");
+            else
+                $(".col_id").addClass("col_off");
+            ar_col['id']=this.checked;
+        }
+
+        column_alpha.onclick = function (e){
+            if(this.checked)
+                $(".col_alpha").removeClass("col_off");
+            else
+                $(".col_alpha").addClass("col_off");
+            ar_col['alpha']=this.checked;
+        }
+
+        column_snp.onclick = function (e){
+            if(this.checked)
+                $(".col_snp").removeClass("col_off");
+            else
+                $(".col_snp").addClass("col_off");
+            ar_col['snp']=this.checked;
+        }
+
+        column_class.onclick = function (e){
+            if(this.checked)
+                $(".col_class").removeClass("col_off");
+            else
+                $(".col_class").addClass("col_off");
+            ar_col['class']=this.checked;
+        }
+
+        column_sex.onclick = function (e){
+            if(this.checked)
+                $(".col_sex").removeClass("col_off");
+             else
+                $(".col_sex").addClass("col_off");
+            ar_col['sex']=this.checked;
+        }
+
+        column_dt.onclick = function (e){
+            if(this.checked)
+                $(".col_dt").removeClass("col_off");
+            else
+                $(".col_dt").addClass("col_off");
+            ar_col['dt']=this.checked;
+        }
+
+        column_teacher.onclick = function (e){
+            if(this.checked)
+                $(".col_teacher").removeClass("col_off");
+            else
+                $(".col_teacher").addClass("col_off");
+            ar_col['teacher']=this.checked;
+        }
+
+        column_contact.onclick = function (e){
+            if(this.checked)
+                $(".col_contact").removeClass("col_off");
+            else
+                $(".col_contact").addClass("col_off");
+            ar_col['contact']=this.checked;
+        }
+
+        column_address.onclick = function (e){
+            if(this.checked)
+                $(".col_address").removeClass("col_off");
+            else
+                $(".col_address").addClass("col_off");
+            ar_col['address']=this.checked;
+        }
+
+        column_social_group.onclick = function (e){
+            if(this.checked)
+                $(".col_social_group").removeClass("col_off");
+            else
+                $(".col_social_group").addClass("col_off");
+            ar_col['social_group']=this.checked;
+        }
+
+        function fetch_data(page){
+              // console.log(document.getElementById('field_sort').value);
+             // console.log(JSON.stringify(ar_col));
+            $.ajax({
+                url:"pupils/fetchdata?page="+page
+                    +"&countpupilsonpage="+countPupilsOnPage
+                    +"&classeslist="+document.getElementById('filter').value
+                    +"&sex="+document.getElementById('filter_sex').value
+                    +"&snp="+document.getElementById('snp').value
+                    +"&dt="+document.getElementById('filter_year').value
+                    +"&arcol="+JSON.stringify(ar_col)
+                    +"&sort="+document.getElementById('sort_f').value
+                    +"&sortdir="+document.getElementById('sort_d').value
+                ,
+                success:function(data){
+                    // console.log(data);
+                    $('#dataT').html(data);
+                     document.getElementById('timeLoad').innerHTML="Time loaded: "+(Date.now()-timerStart)+" ms";
+                    // console.log("Time loaded: ", Date.now()-timerStart+" ms");
+                }
+            });
+        }
 
 
 
-</script>
+
+        function getpupilinfo(id) {
+            document.getElementById('f').reset();
+            $.ajax({
+                url: "/arm/pupil/edit/"+id,
+                success: function (data) {
+                    let obj = JSON.parse(data);
+                    console.log(obj);
+                    document.getElementById('id_f').value=obj.id;
+                    document.getElementById('snp_f').value=obj.snp;
+                    document.getElementById('alpha_f').value=obj.alpha;
+                    $("#classes_f").val(obj.classes.id);
+                    document.getElementById('dt_f').value=obj.dt;
+                    $("#sex_f").val(obj.sex);
+                    document.getElementById('contacts_f').value=obj.contacts;
+                    document.getElementById('address_f').value=obj.address;
+                    document.getElementById('parents_f').value=obj.parents;
+                    for(let i=0;i<obj.pupilinsocialgroup.length;i++){
+                        document.getElementById('sg'+obj.pupilinsocialgroup[i].socialgroup_id).checked=true;
+                    }
+                }
+            });
+        }
+
+        $('.btnSubmit').click(function(event){
+            // console.log("YES IT IS");
+            event.preventDefault();
+            $.ajax({
+                type:"POST",
+                url:"/arm/pupil/save",
+                data: $("#f").serialize(),
+                success: function(data){
+                    console.log('Ajax responded');
+                    document.getElementById('rebuild').click();
+                    $('#exampleModal').modal('hide');
+                    if(data.errors) {
+                        // document.getElementById('errorAjax').innerHTML='';
+                        // document.getElementById('errorAjax').style.display='block';
+                        console.log('errors validation');
+                        console.log(data.errors);
+                        for(let key in data.errors)
+                        {
+                            console.log(key);
+                            // document.getElementById('errorAjax').innerHTML+='<li>'+data.errors[key]+'</li>';
+                        };
+                    } else
+                    {
+                        console.log('NOT errors validation');
+                        // $('#addMember').modal('hide');
+                        // window.location.href = '/successAddQueryPartner';
+                    }
+                },
+                error: function (data) {
+                    concole.log(111);
+                    console.log("777".data);
+                    // $("#emailm").css('color','#fc0059').html(data.responseJSON.errors.email);
+                    // console.log("data.responseJSON);
+                    // console.log('Ajax not responded');
+                }
+            });
+        });
+
+    function sort(field){
+        let prev_field = document.getElementById('sort_f').value;
+        let dir = document.getElementById('sort_d').value;
+
+        if(prev_field!=field) document.getElementById('sort_d').value='ASC';
+         else
+          if(dir == 'ASC') document.getElementById('sort_d').value='DESC';
+            else document.getElementById('sort_d').value='ASC';
+        document.getElementById('sort_f').value = field;
+
+        fetch_data(1);
+    }
+
+    // function editpupil(id){
+        //     let path='/arm/pupil/edit/'+id;
+        //     myWin= open(path,"displayWindow,height=200","status=no,toolbar=no,menubar=no");
+        // }
+    </script>
+</div><!-- /.page-wrapper -->
 
 </body>
 </html>

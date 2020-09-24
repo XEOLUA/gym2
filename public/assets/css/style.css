@@ -7204,3 +7204,62 @@ a:visited {
   margin: 0;
   list-style-type: none;
 }
+
+.rTable {
+  display: table;
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #999999;
+  padding: 2px;
+  margin-bottom: 10px;
+}
+.rTableRow {
+  display: table-row;
+}
+.rTableHeading {
+  display: table-header-group;
+}
+.rTableCell {
+  display: table-cell;
+  padding: 2px 9px;
+  margin: 0;
+  line-height: normal;
+  border-top: 1px solid silver;
+  width: 1%;
+}
+.rTableHeading {
+  display: table-header-group;
+}
+.rTableFoot {
+  display: table-footer-group;
+}
+.rTableBody {
+  display: table-row-group;
+}
+.rTableHead {
+  display: table-cell;
+  padding: 1px;
+  margin: 0;
+  line-height: normal;
+  font-weight: bold;
+  padding: 1px 9px;
+}
+
+.col_off{
+  display: none;
+}
+
+.col_on_off{
+  height: 30px;
+  margin: 0 5px;
+}
+
+.teachersphotos{
+  background: rgba(222, 222, 222, 0.82);
+  opacity: 0.75;
+  transition: 1s;
+}
+.teachersphotos:hover{
+  opacity: 1;
+}

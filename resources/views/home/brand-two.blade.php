@@ -14,33 +14,6 @@
 
             </div><!-- /.item -->
             @endforeach
-{{--            <div class="item">--}}
-{{--                <img src="assets/images/brand-1-1.png" alt="">--}}
-{{--            </div><!-- /.item -->--}}
-{{--            <div class="item">--}}
-{{--                <img src="assets/images/brand-1-1.png" alt="">--}}
-{{--            </div><!-- /.item -->--}}
-{{--            <div class="item">--}}
-{{--                <img src="assets/images/brand-1-1.png" alt="">--}}
-{{--            </div><!-- /.item -->--}}
-{{--            <div class="item">--}}
-{{--                <img src="assets/images/brand-1-1.png" alt="">--}}
-{{--            </div><!-- /.item -->--}}
-{{--            <div class="item">--}}
-{{--                <img src="assets/images/brand-1-1.png" alt="">--}}
-{{--            </div><!-- /.item -->--}}
-{{--            <div class="item">--}}
-{{--                <img src="assets/images/brand-1-1.png" alt="">--}}
-{{--            </div><!-- /.item -->--}}
-{{--            <div class="item">--}}
-{{--                <img src="assets/images/brand-1-1.png" alt="">--}}
-{{--            </div><!-- /.item -->--}}
-{{--            <div class="item">--}}
-{{--                <img src="assets/images/brand-1-1.png" alt="">--}}
-{{--            </div><!-- /.item -->--}}
-{{--            <div class="item">--}}
-{{--                <img src="assets/images/brand-1-1.png" alt="">--}}
-{{--            </div><!-- /.item -->--}}
         </div><!-- /.brand-one__carousel owl-carousel owl-theme -->
     </div><!-- /.container -->
 </section><!-- /.brand-one -->

@@ -19,7 +19,8 @@
         "laravel/ui": "^2.1",
         "laravelrus/sleepingowl": "^7.20",
         "lavary/laravel-menu": "1.7.7",
-        "spatie/laravel-permission": "^3.16"
+        "spatie/laravel-permission": "^3.16",
+      "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",
