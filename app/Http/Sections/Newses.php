@@ -48,7 +48,7 @@ class Newses extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('far fa-newspaper');
+        $this->addToNavigation()->setPriority(1)->setIcon('far fa-newspaper');
     }
 
     /**

@@ -15,6 +15,7 @@ use App\Olympstatistic;
 use App\Page;
 use App\Position;
 use App\Pupil;
+use App\Slider;
 use App\Socialgroup;
 use App\Subject;
 use App\Teacher;
@@ -49,6 +50,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Olympstatistic::class => 'App\Http\Sections\Olympstatistics',
         Manstatistic::class => 'App\Http\Sections\Manstatistics',
         Circle::class => 'App\Http\Sections\Circles',
+        Slider::class => 'App\Http\Sections\Sliders',
     ];
 
     /**

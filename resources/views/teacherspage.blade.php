@@ -4,12 +4,12 @@
 @section('title','Вчительська сторінка')
 
 @section('content')
-
+{{--    @include('arm.editpupil')--}}
     <div class="page-wrapper">
+
     @include('home.preloader')
     @include('home.topbar-one')
     @include('home.header')
-
 <div style="padding: 20px; text-align: left; line-height: normal; border-bottom: 1px solid silver; margin: 20px;">
     @foreach($pages as $page)
         <a
@@ -19,7 +19,7 @@
                 href="{{url('teachers/page/'.$page->teacher_id.'/'.$page->id)}}">{{$page->title}}</a> |
     @endforeach
 </div>
-<div style="margin: 20px">
+<div style="margin: 20px; line-height: normal">
     @if(isset($pages[$cur_page]->content))
         {!! $pages[$cur_page]->content !!}
     @else

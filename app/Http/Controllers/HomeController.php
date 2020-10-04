@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Circle;
 use App\Direction;
 use App\Http\Sections\Circles;
+use App\Http\Sections\Sliders;
 use App\Manstatistic;
 use App\Mo;
 use App\News;
@@ -13,6 +14,7 @@ use App\Olympstatistic;
 use App\Page;
 use App\Position;
 use App\Services\Statistics;
+use App\Slider;
 use App\Teacher;
 use App\Teacherspage;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -62,10 +64,11 @@ class HomeController extends BaseController
         $news = News::with('newstypes')->take(10)->get();
 
         $circles = Circle::where('active',1)->get()->sortBy('order');
+        $sliders = Slider::where('active',1)->get()->sortBy('order');
 
         return view('index',compact('direction','olympstat',
             'manstat','stat','diplomsCnt','mos','circles','news','teachers',
-        'teachers_statistics'
+        'teachers_statistics', 'sliders'
         ));
     }
 
@@ -158,6 +161,7 @@ class HomeController extends BaseController
     }
 
     public function teacherspages($teacher_id){
+
         $cur_page=(int)(request()->page);
         $teacherinfo = Teacher::with('subjects')->where('id',$teacher_id)->get()[0];
 
