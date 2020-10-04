@@ -44,6 +44,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('pupils/fetchdata', 'PupilController@pupillistaj')->name('pupillistaj');
         Route::get('pupil/edit/{id}', 'PupilController@editpupil')->name('editpupil');
         Route::post('pupil/save', 'PupilController@savepupil')->name('savepupil');
+
+        Route::get('profile/{page_id?}', 'TeacherController@index');
+        Route::get('profile/page/{page_id}/{direct}', 'TeacherController@pageorder');
+        Route::get('profile/teacherpage/edit/{page_id}', 'TeacherController@getpageinfo');
+        Route::post('profile/teacherpage/save', 'TeacherController@saveteacherpage')->name('saveteacherpage');
+        Route::post('profile/teacherpage/delete', 'TeacherController@deleteteacherpage')->name('deleteteacherpage');
+        Route::get('profile/teacher/private/{teacher_id}', 'TeacherController@getteacherinfo')->name('getteacherinfo');
+        Route::post('profile/teacher/privat/save', 'TeacherController@saveteacherinfo')->name('saveteacherinfo');
+
     });
 });
 

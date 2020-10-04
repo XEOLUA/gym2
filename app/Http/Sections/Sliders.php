@@ -19,13 +19,13 @@ use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 use SleepingOwl\Admin\Section;
 
 /**
- * Class Newstypes
+ * Class Sliders
  *
- * @property \App\Newstype $model
+ * @property \App\Slider $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Newstypes extends Section implements Initializable
+class Sliders extends Section implements Initializable
 {
     /**
      * @var bool
@@ -35,7 +35,7 @@ class Newstypes extends Section implements Initializable
     /**
      * @var string
      */
-    protected $title="Рубрики новин";
+    protected $title="Слайдер";
 
     /**
      * @var string
@@ -47,7 +47,7 @@ class Newstypes extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(1)->setIcon('fas fa-newspaper');
+        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-running');
     }
 
     /**
@@ -58,50 +58,22 @@ class Newstypes extends Section implements Initializable
     public function onDisplay($payload = [])
     {
         $columns = [
-            AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumn::link('name', 'Name', 'created_at')
-                ->setSearchCallback(function($column, $query, $search){
-                    return $query
-                        ->orWhere('name', 'like', '%'.$search.'%')
-                        ->orWhere('created_at', 'like', '%'.$search.'%')
-                    ;
-                })
-                ->setOrderable(function($query, $direction) {
-                    $query->orderBy('created_at', $direction);
-                })
-            ,
-            AdminColumn::count('newses', 'Новин'),
-            AdminColumnEditable::text('slug', 'Slug'),
-            AdminColumn::boolean('active', 'On'),
-            AdminColumn::text('created_at', 'Created / updated', 'updated_at')
-                ->setWidth('160px')
-                ->setOrderable(function($query, $direction) {
-                    $query->orderBy('updated_at', $direction);
-                })
-                ->setSearchable(false)
-            ,
+            AdminColumn::text('id', '#')->setWidth(50),
+            AdminColumnEditable::text('title', 'Заголовок'),
+            AdminColumn::image('image', 'Зображення'),
+            AdminColumn::order('order')->setLabel('Порядок'),
+            AdminColumnEditable::checkbox('active', 'On'),
+
         ];
 
         $display = AdminDisplay::datatables()
             ->setName('firstdatatables')
-            ->setOrder([[0, 'asc']])
-            ->setDisplaySearch(true)
+            ->setApply(function ($query) {
+                $query->orderBy('order', 'asc');
+            })
             ->paginate(25)
             ->setColumns($columns)
         ;
-
-        $display->setColumnFilters([
-            AdminColumnFilter::select()
-                ->setModelForOptions(\App\Newstype::class, 'name')
-                ->setLoadOptionsQueryPreparer(function($element, $query) {
-                    return $query;
-                })
-                ->setDisplay('name')
-                ->setColumnName('name')
-                ->setPlaceholder('All names')
-            ,
-        ]);
-        $display->getColumnFilters()->setPlacement('card.heading');
 
         return $display;
     }
@@ -116,17 +88,12 @@ class Newstypes extends Section implements Initializable
     {
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()->addColumn([
-                AdminFormElement::text('name', 'Name')
-                    ->required()
-                ,
-                AdminFormElement::html('<hr>'),
-                AdminFormElement::datetime('created_at')
-                    ->setVisible(true)
-                    ->setReadonly(false)
-                ,
-                AdminFormElement::html('last AdminFormElement without comma')
+                AdminFormElement::text('title', 'Заголовок'),
+                AdminFormElement::image('image', 'Зображення 500x800'),
             ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
                 AdminFormElement::text('id', 'ID')->setReadonly(true),
+                AdminFormElement::text('order', 'Порядок'),
+                AdminFormElement::checkbox('active', 'ON')->setDefaultValue(1),
                 AdminFormElement::html('last AdminFormElement without comma')
             ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
         ]);

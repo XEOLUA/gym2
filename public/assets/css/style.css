@@ -7258,8 +7258,10 @@ a:visited {
 .teachersphotos{
   background: rgba(222, 222, 222, 0.82);
   opacity: 0.75;
-  transition: 1s;
+  transition: 0.2s;
 }
 .teachersphotos:hover{
   opacity: 1;
+  height: 93px;
+  box-shadow: 0 0 5px silver;
 }
