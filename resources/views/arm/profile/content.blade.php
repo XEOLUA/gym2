@@ -38,7 +38,7 @@
         </div>
         <div style=" padding: 5px; background: #022c46; color: #748290; border-bottom: 1px dashed silver">
             <i class="fas fa-cog"></i> <a href="#" style="color: silver; "
-          onclick="getteacherinfo('{{auth()->user()->id}}');"
+          onclick="getteacherinfo('{{auth()->user()->teacher_id}}');"
           data-toggle="modal" data-target="#modalTeacher"
             >Особиста інформація</a>
         </div>
