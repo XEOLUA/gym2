@@ -179,6 +179,7 @@ class PupilController extends Controller
         $pupil->dt = $data['dt_f'];
         $pupil->sex = $data['sex_f'];
         $pupil->contacts = $data['contacts_f'];
+        $pupil->parents = $data['parents_f'];
 
         $soc_gr = Socialgroup::all()->pluck('name','id');
 

@@ -51,8 +51,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('profile/teacherpage/save', 'TeacherController@saveteacherpage')->name('saveteacherpage');
         Route::post('profile/teacherpage/delete', 'TeacherController@deleteteacherpage')->name('deleteteacherpage');
         Route::get('profile/teacher/private/{teacher_id}', 'TeacherController@getteacherinfo')->name('getteacherinfo');
-        Route::post('profile/teacher/privat/save', 'TeacherController@saveteacherinfo')->name('saveteacherinfo');
-
+        Route::post('profile/teacher/privatsave', 'TeacherController@saveteacherinfo')->name('saveteacherinfo');
     });
 });
 
