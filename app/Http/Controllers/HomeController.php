@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Circle;
+use App\Classe;
 use App\Direction;
 use App\Http\Sections\Circles;
 use App\Http\Sections\Sliders;
@@ -13,8 +14,10 @@ use App\Newstype;
 use App\Olympstatistic;
 use App\Page;
 use App\Position;
+use App\Pupil;
 use App\Services\Statistics;
 use App\Slider;
+use App\Subject;
 use App\Teacher;
 use App\Teacherspage;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -168,5 +171,63 @@ class HomeController extends BaseController
         $pages = Teacherspage::where('teacher_id',$teacher_id)->orderBy('order')->get()->keyBy('id');
 
         return view('teacherspage',compact('teacherinfo','pages','cur_page'));
+    }
+
+    public function statisticsolymp(){
+
+        $etaps = [
+            '2'=>'Міський',
+            '3'=>'Обласний',
+            '4'=>'Всеукраїнський'
+        ];
+
+        $subjects = Subject::all()->keyBy('id','name');
+        $teachers = Teacher::all()->keyBy('id','snp');
+
+        $stat = DB::table('olympstatistics')
+            ->join('subjects', 'olympstatistics.subject_id', '=', 'subjects.id')
+            ->orderBy('level','DESC')
+            ->orderBy('year','DESC')
+            ->orderBy('subjects.name')
+            ->orderBy('position')
+            ->get();
+
+        $group_etap = $stat->groupBy(['level']);
+        $group_etap_subject = $stat->groupBy(['level','subject_id']);
+//dd($group_etap);
+        $counts_etaps = [
+            '2'=>$group_etap[2]->count(),
+            '3'=>$group_etap[3]->count(),
+            '4'=>$group_etap[4]->count()
+        ];
+
+        $group = $stat->groupBy(['level','subject_id','year']);
+//    dd($group);
+        return view('statistics_olymp',compact('stat','counts_etaps', 'subjects','etaps','teachers','group','group_etap_subject'));
+    }
+
+
+    public function classes($class_id = null){
+
+        $classes = Classe::with('teachers','pupils')
+        ->orderBy('name')
+        ->get();
+
+        $ar = $classes->map(function ($item){
+           return $item->pupils->count();
+        });
+
+        $cl = [];
+        foreach ($classes as $class){
+            $m=0;$f=0;
+            foreach($class->pupils as $item){
+                ($item->sex==1) ? $m++ : $f++;
+            }
+            $cl[$class->id]=['m'=>$m,'f'=>$f];
+        }
+//dd($cl);
+        $all_pupils = $ar->sum();
+
+        return view('classes',compact('classes','all_pupils','cl'));
     }
 }

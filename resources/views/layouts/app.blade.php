@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{url('assets/plugins/kipso-icons/style.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/vegas.min.css')}}">
+    <link rel="stylesheet" href="{{url('bootstrap4/css/bootstrap.css')}}">
 
     <!-- template styles -->
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
@@ -36,11 +37,11 @@
 {{--        gtag('config', 'UA-166193936-1');--}}
 {{--    </script>--}}
 
-    <link rel="stylesheet" type="text/css" href={{url("//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900")}}>
+{{--    <link rel="stylesheet" type="text/css" href={{url("//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900")}}>--}}
 {{--    <link rel="icon" href="images/favicon.ico" type="image/x-icon">--}}
     <link rel="stylesheet" type="text/css" href="{{url('css/app.css')}}">
     <link rel="icon" href="{{url('images/favicon.ico?v=2')}}" type={{url("image/x-icon")}}>
-    <script src="{{url('packages/sleepingowl/ckeditor/ckeditor.js')}}"></script>
+
 {{--    <link rel="stylesheet" href="{{url('css/bootstrap.css')}}">--}}
 {{--    <link rel="stylesheet" href={{url("fonts/fonts.css")}}>--}}
 {{--    <link rel="stylesheet" href={{url("css/style.css")}}>--}}
@@ -53,8 +54,8 @@
 </main>
 
 <div class="snackbars" id="form-output-global"></div>
-<script src="{{url('js/core.min.js')}}"></script>
-<script src="{{url('js/script.js')}}"></script>
+{{--<script src="{{url('js/core.min.js')}}"></script>--}}
+{{--<script src="{{url('js/script.js')}}"></script>--}}
 <script defer src="https://www.google.com/recaptcha/api.js" async></script>
 <script src="{{url('assets/js/jquery.min.js')}}"></script>
 <script src="{{url('assets/js/bootstrap.bundle.min.js')}}"></script>
@@ -66,6 +67,9 @@
 <script src="{{url('assets/js/jquery.magnific-popup.min.js')}}"></script>
 <script src="{{url('assets/js/countdown.min.js')}}"></script>
 <script src="{{url('assets/js/vegas.min.js')}}"></script>
+
+<script src="{{url('/bootstrap4/js/bootstrap.js')}}"></script>
+<script src="{{url('bootstrap4/js/bootstrap.bundle.js')}}"></script>
 
 <!-- template scripts -->
 <script src="{{url('assets/js/theme.js')}}"></script>

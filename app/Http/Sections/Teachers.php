@@ -109,6 +109,8 @@ class Teachers extends Section implements Initializable
                 AdminFormElement::columns()->addColumn([
                     AdminFormElement::text('snp', 'Вчитель')->required(),
                     AdminFormElement::image('photo', 'Фото'),
+                    AdminFormElement::text('phones', 'Телефон'),
+                    AdminFormElement::text('mail', 'E-mail'),
                     AdminFormElement::checkbox('active', 'On'),
 //                    AdminFormElement::text('group', 'Група'),
                     AdminFormElement::html('<hr>'),

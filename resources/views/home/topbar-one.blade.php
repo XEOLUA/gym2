@@ -2,8 +2,8 @@
     <div class="container">
         <div class="topbar-one__left">
             <a href="#">gym2@ukr.net</a>
-            <a href="#">(8-0382) 63-20-64</a>
-            <a href="#">(8-0382) 63-27-32</a>
+            <a href="#">(0382) 63-20-64</a>
+            <a href="#">(0382) 63-27-32</a>
         </div><!-- /.topbar-one__left -->
         <div class="topbar-one__right">
             @if(!auth()->check())

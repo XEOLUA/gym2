@@ -5,7 +5,10 @@
         </div><!-- /.block-title -->
         <div class="brand-one__carousel owl-carousel owl-theme">
             @foreach($circles as $circle)
-            <div class="item" title="{{$circle->description}}">
+            <div class="item"
+                 data-toggle="tooltip"
+                 data-html="true"
+                 title="{{$circle->description}}">
 
                 <a href="{{url('page/education-sections#'.$circle->anchor)}}"><div>
                     <img style="height: 80px" src="{{$circle->images ?? '$circle->images'}}" alt="">

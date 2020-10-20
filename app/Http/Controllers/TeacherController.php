@@ -7,8 +7,10 @@ use App\Position;
 use App\Subject;
 use App\Teacher;
 use App\Teacherspage;
+use App\User;
 use DB;
 use Illuminate\Http\Request;
+use Symfony\Component\VarDumper\VarDumper;
 
 class TeacherController extends Controller
 {
@@ -16,7 +18,7 @@ class TeacherController extends Controller
         $pages = Teacherspage::where('teacher_id',auth()->user()->teacher_id)->orderBy('order')->get()->keyBy('id');
         if($pages->count()>0 && $page_id==null) $page_id=$pages->first()->id;
         $positions = Position::all();
-        $mos = Mo::where('active',1)->get();
+        $mos = Mo::all();
         $subjects = Subject::all();
         return view('profile',
             compact('pages','page_id','positions','mos','subjects'));
@@ -54,7 +56,17 @@ class TeacherController extends Controller
     public function saveteacherpage(Request $request){
         $data = $request->all();
 
-        $page = Teacherspage::find($data['id_f']);
+        if(isset($data['id_f']) && $data['id_f'])
+         $page = Teacherspage::find($data['id_f']);
+        else{
+            $page = new Teacherspage();
+            $last_page = Teacherspage::where('teacher_id',auth()->user()->teacher_id)->
+            orderby('order', 'desc')->first();
+            $page->teacher_id = auth()->user()->teacher_id;
+            $page->order = $last_page->order + 1;
+        }
+
+
         $page->title = $data['title_f'];
         $page->content = $data['content_f'];
         $page->save();

@@ -1,6 +1,10 @@
 <div style="display: flex">
     <div>
-        <div style="padding: 5px; background: #022c46; color: #748290; border-bottom: 1px dashed silver; border-radius: 0 10px 0 0">Сторінки:</div>
+        <div style="padding: 5px; background: #022c46; color: #748290; border-bottom: 1px dashed silver; border-radius: 0 10px 0 0">Сторінки:
+            <a href="" title="Створити нову сторінку" style="font-weight: bold; font-size: large;
+             border: 1px solid silver; border-radius: 3px; margin: 0; padding: 0 5px 0 5px; color: #7adeee"
+               data-toggle="modal" data-target="#exampleModal"
+            >+</a></div>
         @foreach($pages as $page)
             <div style="display: flex; padding: 5px; background: #022c46; color: #748290; border-bottom: 1px dashed silver">
                 <span><i class="fas fa-file-word"></i></span>

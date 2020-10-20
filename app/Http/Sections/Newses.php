@@ -75,11 +75,12 @@ class Newses extends Section implements Initializable
             AdminColumnEditable::select('newstype_id', 'Рубрика')->setWidth('100px')
             ->setOptions($newstypes),
             AdminColumn::order('order')->setLabel('Порядок')->setWidth('100px'),
+            AdminColumnEditable::datetime('updated_at')->setLabel('Змінено')->setWidth('100px'),
             AdminColumnEditable::checkbox('active', 'On'),
-            AdminColumn::text('created_at', 'Created / updated', 'updated_at')
-                ->setWidth('160px')
-                ->setSearchable(false)
-            ,
+//            AdminColumn::text('created_at', 'Created / updated', 'updated_at')
+//                ->setWidth('160px')
+//                ->setSearchable(false)
+//            ,
         ];
 
         $display = AdminDisplay::datatables()
