@@ -105,9 +105,7 @@ class Directions extends Section implements Initializable
                 AdminFormElement::text('description', 'Опис')->required(),
                 AdminFormElement::image('image','Зображення'),
                 AdminFormElement::html('<hr>'),
-                AdminFormElement::datetime('created_at')
-                    ->setVisible(true)
-                    ->setReadonly(false),
+                AdminFormElement::text('link','URL - детально'),
                 AdminFormElement::html('last AdminFormElement without comma')
             ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
                 AdminFormElement::text('id', 'ID')->setReadonly(true),

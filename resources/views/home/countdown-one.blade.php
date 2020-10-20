@@ -4,7 +4,7 @@
             <div class="col-lg-6">
                 <div class="countdown-one__content">
                     <h2 class="countdown-one__title">Краща 10</h2><!-- /.countdown-one__title -->
-                    <p class="countdown-one__tag-line">учнів за останні {{date('Y')-2003}} років років</p>
+                    <p class="countdown-one__tag-line">учнів за останні {{date('Y')-2003}} років</p>
                     <!-- /.countdown-one__tag-line -->
                     <table style="line-height: 25px;border:1px solid silver;">
                         <tr>
@@ -59,7 +59,7 @@
 {{--                        <input type="text" placeholder="Email Address" name="email">--}}
 {{--                        <input type="text" placeholder="Phone Number" name="phone">--}}
 {{--                        <input type="text" placeholder="Comment" name="message">--}}
-                        <a href="{{url('page/man-statistics')}}" class="course-one__link">Дізнатися більше</a>
+                        <a href="{{url('statistics/olymp')}}" class="course-one__link">Дізнатися більше</a>
                     </div><!-- /.become-teacher__form-content -->
                 </div><!-- /.become-teacher__form -->
             </div><!-- /.col-lg-6 -->

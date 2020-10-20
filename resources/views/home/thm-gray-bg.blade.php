@@ -18,12 +18,16 @@
                     <div>
                         <span>Предметів:</span>
                         <span style="font-weight: bold;color: orange"
-                        title="@foreach($mo->subjects as $subject)&#013{{$subject->name}}@endforeach">{{$mo->subjects->count()}}</span>
-                    </div>
+                              data-toggle="tooltip"
+                              data-html="true"
+                              title="@foreach($mo->subjects as $subject){!! $subject->name !!}<br>@endforeach">{{$mo->subjects->count()}}</span>
+                        </div>
                     <div>
                         <span>Вчителів:</span>
                         <span style="font-weight: bold;color: orange"
-                              title="@foreach($mo->teachers as $teacher)&#013{{$teacher->snp}}@endforeach">{{$mo->teachers->count()}}</span>
+                              data-toggle="tooltip"
+                              data-html="true"
+                              title="@foreach($mo->teachers as $teacher)<nobr><img style='margin:2px' width=20 src='{{url($teacher->photo ?? 'http://gym2.km.ua/images/w.gif')}}'>{{explode(" ",$teacher->snp)[1].' '.explode(" ",$teacher->snp)[0]}}</nobr><br>@endforeach">{{$mo->teachers->count()}}</span>
                     </div>
                     <!-- /.course-category-one__title -->
                 </div><!-- /.course-category-one__single -->

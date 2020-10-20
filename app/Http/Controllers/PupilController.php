@@ -170,6 +170,12 @@ class PupilController extends Controller
         return json_encode($pupiledit[0]);
     }
 
+    public function printpupil($id){
+        $pupil = Pupil::with('classes')->where('id',$id)->get()[0];
+        return view('arm.printpupil', compact('pupil'));
+
+    }
+
     public function savepupil(Request $request){
         $data = $request->all();
         $pupil = Pupil::find($data['id_f']);

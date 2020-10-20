@@ -15,7 +15,9 @@
     @foreach($teachers as $teacher)
         <div onclick="location='{{url('teachers/page/'.$teacher->id)}}'">
             <img class="teachersphotos" style="margin:2px; cursor:pointer"
-                 title="{{$teacher->snp}}&#013{{$positions[$teacher->position]}}{{$teacher->sex=='ж'?($positions[$teacher->position]=='вчитель' || $positions[$teacher->position]=='секретар')?'ка':'':''}}@foreach($teacher->subjects as $subject)&#013{{$subject->name}}@endforeach
+                 data-toggle="tooltip"
+                 data-html="true"
+                 title="{{explode(" ",$teacher->snp)[1].' '.explode(" ",$teacher->snp)[0]}}<br>{{$positions[$teacher->position]}}{{$teacher->sex=='ж'?($positions[$teacher->position]=='вчитель' || $positions[$teacher->position]=='секретар')?'ка':'':''}}@foreach($teacher->subjects as $subject)&#013{{$subject->name}}@endforeach
                          "
                  src=@if($teacher->photo)"{{$teacher->photo}}" @else @if($teacher->sex=='ж')'http://gym2.km.ua/images/w.gif' @else 'http://gym2.km.ua/images/m.gif' @endif @endif"
                  height="90">

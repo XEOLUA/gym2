@@ -22,6 +22,7 @@ Route::get('/', 'HomeController@index')->name('index');
 //
 //});
 
+Route::get('proba',function (){return view('proba');} );
 
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 Route::get('/home', 'HomeController@index')->name('home');
@@ -34,15 +35,20 @@ Route::get('/statistics', 'HomeController@statistics')->name('statistics');
 Route::get('/page/{slug}', 'HomeController@page')->name('page');
 Route::get('/mos/{slug}', 'HomeController@mospage')->name('mospage');
 Route::get('/teachers/{id}', 'HomeController@teachers')->name('teachers');
+Route::get('/statistics/olymp/', 'HomeController@statisticsolymp')->name('statisticsolymp');
+Route::get('/classes/{class_id?}/', 'HomeController@classes')->name('classes');
+
 Route::prefix('/teachers/page/')->group(function () {
     Route::get('{teacher_id}', 'HomeController@teacherspages')->name('teacherspages');
     Route::get('{teacher_id}/{page}', 'HomeController@teacherspages')->name('teacherspages');
 });
+
 Route::middleware(['auth'])->group(function () {
     Route::prefix('/arm/')->group(function () {
         Route::get('pupils', 'PupilController@pupilslist')->name('pupilslist');
         Route::get('pupils/fetchdata', 'PupilController@pupillistaj')->name('pupillistaj');
         Route::get('pupil/edit/{id}', 'PupilController@editpupil')->name('editpupil');
+        Route::get('pupil/print/{id}', 'PupilController@printpupil')->name('printpupil');
         Route::post('pupil/save', 'PupilController@savepupil')->name('savepupil');
 
         Route::get('profile/{page_id?}', 'TeacherController@index');

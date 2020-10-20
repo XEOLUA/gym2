@@ -13,7 +13,7 @@
 
         <div style="max-width: 800px; text-align: left; margin-left: auto;
                     margin-right: auto;width: 100%;">
-            <h2 style="padding: 20px 0 0">Новини гімназії №2</h2>
+            <h2 style="padding: 20px 0 0; text-align: center">Новини гімназії №2</h2>
             <div
                 style="
                     height: 230px;
@@ -36,11 +36,14 @@
                     src="{{url($news[0]->image ? \App\Services\ImgResize::ImgCopy($news[0]->image,800,404,[232,240,244]) : 'assets/images/blog-2-3.jpg')}}">
             </div>
 
-        <div>
+        <div style="margin: 10px;">
             {{Carbon\Carbon::parse($news[0]->updated_at)->format('M d, Y')}}<br>
             <h2>{{$news[0]->title}}</h2>
             <div style="padding: 20px 0 0">
                 {!! $news[0]->description !!}
+            </div>
+            <div style="text-align: right; font-style: italic">
+                Автор: {{$news[0]->author}}
             </div>
         </div>
         </div>

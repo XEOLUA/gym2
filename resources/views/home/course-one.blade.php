@@ -9,13 +9,13 @@
                         <i class="far fa-heart"></i><!-- /.far fa-heart -->
                     </div><!-- /.course-one__image -->
                     <div class="course-one__content">
-                        <a href="#" class="course-one__category">{{$direct->title}}</a><!-- /.course-one__category -->
+                        <a href="{{$direct->link ?? '#'}}" target="_blank" class="course-one__category">{{$direct->title}}</a><!-- /.course-one__category -->
                         <div class="course-one__admin">
                             <img src="assets/images/team-1-1.jpg" alt="">
-                            від <a href="teacher-details.html">{{$direct->experts}}</a>
+                            від <a target="_blank"  href="{{$direct->link ?? '#'}}">{{$direct->experts}}</a>
                         </div><!-- /.course-one__admin -->
-                        <h2 class="course-one__title" style="min-height: 60px;"><a href="course-details.html">{{$direct->description}}</a></h2>
-                        <a href="#" class="course-one__link">Переглянути зразок</a><!-- /.course-one__link -->
+                        <h2 class="course-one__title" style="min-height: 60px;"><a target="_blank"  href="{{$direct->link ?? '#'}}">{{$direct->description}}</a></h2>
+                        <a target="_blank" target="_blank"  href="{{$direct->link ?? '#'}}" class="course-one__link">Дізнатися більше</a><!-- /.course-one__link -->
                     </div><!-- /.course-one__content -->
                 </div><!-- /.course-one__single -->
             </div><!-- /.item -->
