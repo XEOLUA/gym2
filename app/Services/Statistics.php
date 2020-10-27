@@ -67,6 +67,7 @@ class Statistics
           else $res['teacher']['o'][$teachers[$item->teacher_id]]+=$bal[$item->level][$item->position]['o'];
           if(!isset($res['teacher']['all'][$teachers[$item->teacher_id]])) $res['teacher']['all'][$teachers[$item->teacher_id]]=$bal[$item->level][$item->position]['o'];
           else $res['teacher']['all'][$teachers[$item->teacher_id]]+=$bal[$item->level][$item->position]['o'];
+          $res['teacher']['id'][$teachers[$item->teacher_id]]=$item->teacher_id;
       }
 
       foreach($man as $item){
@@ -74,6 +75,7 @@ class Statistics
           else $res['teacher']['m'][$teachers[$item->teacher_id]]+=$bal[$item->level][$item->position]['m'];
           if(!isset($res['teacher']['all'][$teachers[$item->teacher_id]])) $res['teacher']['all'][$teachers[$item->teacher_id]]=$bal[$item->level][$item->position]['m'];
           else $res['teacher']['all'][$teachers[$item->teacher_id]]+=$bal[$item->level][$item->position]['m'];
+          $res['teacher']['id'][$teachers[$item->teacher_id]]=$item->teacher_id;
       }
       array_multisort($res['teacher']['all'],SORT_DESC);
 

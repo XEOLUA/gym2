@@ -109,14 +109,19 @@ class Teachers extends Section implements Initializable
                 AdminFormElement::columns()->addColumn([
                     AdminFormElement::text('snp', 'Вчитель')->required(),
                     AdminFormElement::image('photo', 'Фото'),
-                    AdminFormElement::text('phones', 'Телефон'),
-                    AdminFormElement::text('mail', 'E-mail'),
-                    AdminFormElement::checkbox('active', 'On'),
+
 //                    AdminFormElement::text('group', 'Група'),
                     AdminFormElement::html('<hr>'),
 
                 ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
                     AdminFormElement::text('id', 'ID')->setReadonly(true),
+                    AdminFormElement::text('phones', 'Телефон'),
+                    AdminFormElement::text('mail', 'E-mail'),
+                    AdminFormElement::select('sex', 'Стать')
+                        ->setOptions(['ч'=>'чол','ж'=>'жін'])
+                        ->required(),
+                    AdminFormElement::date('date', 'ДН'),
+                    AdminFormElement::checkbox('active', 'On'),
 
                 ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
             ]))->setLabel('Вчитель')->setName('tab1');

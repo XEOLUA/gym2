@@ -60,7 +60,7 @@
         -moz-flex: 1 1 15em;
         flex: 1 1 15em;
         margin: 0 -1px; line-height: 25px;border:1px solid silver;
-        width:48%; margin-left: 10px; margin-right: 10px; margin-top: 20px;">
+        width:48%; margin-left: 10px; margin-right: 10px; margin-top: 20px; margin-bottom: 10px;">
             <tr><th colspan="5" style="text-align: center; background: #7a8793;color: #ffffff">Учні</th></tr>
             <tr>
                 <th>М</th>
@@ -74,14 +74,14 @@
             @endphp
             @foreach($stat['pupil']['all'] as $pupil => $val)
                 @php
-                    if($val!=$prev) {$s="style='color:#81868a'"; $i++;}
-                    else $s="style='color:silver'";
+                    if($val!=$prev) {$s="color:#2da397;font-weight: bold"; $i++;}
+                    else $s="color:silver;font-weight: normal;";
                 @endphp
                 <tr style="border-top:1px solid silver">
-                    <td><span {{$s}}>{{$i}}.</span></td>
+                    <td><span style="{{$s}}">{{$i}}.</span></td>
                     <td>{{$pupil}}</td>
-                    <td style="font-style: italic">{{$stat['pupil']['o'][$pupil] ?? '0'}}</td>
-                    <td style="font-style: italic">{{$stat['pupil']['m'][$pupil] ?? '0'}}</td>
+                    <td style="font-style: italic"><a href="{{url('statistics/olymps/pupils/'.$pupil)}}">{{$stat['pupil']['o'][$pupil] ?? '-'}}</a></td>
+                    <td style="font-style: italic"><a href="{{url('statistics/mans/pupils/'.$pupil)}}">{{$stat['pupil']['m'][$pupil] ?? '-'}}</a></td>
                     <td style="font-weight: bold">{{$val}}</td>
                 </tr>
                 @php $prev=$val; @endphp
@@ -106,14 +106,21 @@
                 @endphp
                 @foreach($stat['teacher']['all'] as $teacher => $val)
                     @php
-                        if($val!=$prev) {$s="style='color:#81868a'"; $i++;}
-                        else $s="style='color:silver'";
+                        if($val!=$prev) {$s="color:#2da397;font-weight: bold"; $i++;}
+                        else $s="color:silver;font-weight: normal;";
                     @endphp
                     <tr style="border-top:1px solid silver">
-                        <td><span {{$s}}>{{$i}}.</span></td>
+                        <td><span style="{{$s}}">{{$i}}.</span></td>
                         <td>{{$teacher}}</td>
-                        <td style="font-style: italic">{{$stat['teacher']['o'][$teacher] ?? '0'}}</td>
-                        <td style="font-style: italic">{{$stat['teacher']['m'][$teacher] ?? '0'}}</td>
+                        <td style="font-style: italic">
+                            @if(isset($stat['teacher']['o'][$teacher]))<a href="{{url('statistics/olymps/teachers/'.($stat['teacher']['id'][$teacher] ?? ''))}}">{{$stat['teacher']['o'][$teacher] ?? '0'}}</a>
+                            @else -
+                            @endif
+                        </td>
+                        <td style="font-style: italic">
+                            @if(isset($stat['teacher']['m'][$teacher]))<a href="{{url('statistics/mans/teachers/'.($stat['teacher']['id'][$teacher] ?? ''))}}">{{$stat['teacher']['m'][$teacher] ?? '0'}}</a>
+                            @else -
+                            @endif</td>
                         <td style="font-weight: bold">{{$val}}</td>
                     </tr>
                     @php $prev=$val; @endphp

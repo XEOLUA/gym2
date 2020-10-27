@@ -1,13 +1,5 @@
-<h2 style="text-align: center"><a href="{{route('statisticsolymp')}}">Статистика олімпіад</a></h2>
-<h4 style="text-align: center; color: #2da397;"> за останні {{date('Y')-2003}} років</h4>
-
-@if(!Request::route()->parameter('level'))
-<div style="max-width: 800px; margin: 0 auto 0 auto">
-    <iframe frameborder="0" scrolling="no"
-            src="https://infogr.am/1352037726-036040"
-            style="border:none; width: 100%; height: 520px" ></iframe>
-</div>
-@endif
+<h2 style="text-align: center"><a href="{{route('statisticsolymp')}}">Статистика олімпіад</a> <b><a href="{{url('teachers/page/'.Request::route()->parameter('teacher'))}}">{{$teachers[Request::route()->parameter('teacher')]->snp}}</a></b></h2>
+{{--<h4 style="text-align: center; color: #2da397;"> за останні {{date('Y')-2003}} років</h4>--}}
 
 <div style="max-width:800px; margin: 10px auto 0 auto; padding: 10px;">
     @foreach($group as $etap_id => $etap)
@@ -22,8 +14,7 @@
                             <div class="stat-block">
                                 <span>
                                    Диплом <span style="font-weight: bold; color: #0b90c4">{{$item->position}}</span>-го
-                                ступеня, учень: <a href="{{url('statistics/olymps/pupils/'.$item->pupil)}}">{{$item->pupil}}</a>, керівник: <a
-                                            href="{{url('statistics/olymps/teachers/'.$item->teacher_id)}}">{{$teachers[$item->teacher_id]['snp']}}</a>
+                                ступеня, учень: <a href="{{url('statistics/olymps/pupils/'.$item->pupil)}}">{{$item->pupil}}</a>, керівник: {{$teachers[$item->teacher_id]['snp']}}
                                 </span>
                             </div>
                         @endforeach

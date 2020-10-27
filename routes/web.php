@@ -35,7 +35,13 @@ Route::get('/statistics', 'HomeController@statistics')->name('statistics');
 Route::get('/page/{slug}', 'HomeController@page')->name('page');
 Route::get('/mos/{slug}', 'HomeController@mospage')->name('mospage');
 Route::get('/teachers/{id}', 'HomeController@teachers')->name('teachers');
-Route::get('/statistics/olymp/', 'HomeController@statisticsolymp')->name('statisticsolymp');
+Route::get('/statistics/olymp/{level?}/{subject?}/{year?}', 'HomeController@statisticsolymp')->name('statisticsolymp');
+Route::get('/statistics/olymps/pupils/{pupil}', 'HomeController@statisticsolymppupil')->name('statisticsolymppupil');
+Route::get('/statistics/mans/pupils/{pupil}', 'HomeController@statisticsmanpupil')->name('statisticsmanpupil');
+Route::get('/statistics/olymps/teachers/{teacher}', 'HomeController@statisticsolympteacher')->name('statisticsolympteacher');
+Route::get('/statistics/mans/teachers/{teacher}', 'HomeController@statisticsmanteacher')->name('statisticsmanteacher');
+
+Route::get('/statistics/man/{level?}/{subject?}/{year?}', 'HomeController@statisticsman')->name('statisticsman');
 Route::get('/classes/{class_id?}/', 'HomeController@classes')->name('classes');
 
 Route::prefix('/teachers/page/')->group(function () {
