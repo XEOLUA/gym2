@@ -16,8 +16,10 @@
         @if(($cur_page && $page->id==$cur_page) || (!$cur_page && $page->id==$pages->first()->id))
         style="font-weight: bold"
         @endif
-                href="{{url('teachers/page/'.$page->teacher_id.'/'.$page->id)}}">{{$page->title}}</a> |
+                href="{{url('teachers/page/'.$page->teacher_id.'/'.$page->id)}}"><i class="fas fa-caret-right"></i> {{$page->title}}</a> |
     @endforeach
+        <a href="{{url('statistics/olymps/teachers/'.$teacherinfo->id)}}"><i class="fas fa-chart-line"></i> Олімпіади</a> |
+        <a href="{{url('statistics/mans/teachers/'.$teacherinfo->id)}}"><i class="fas fa-chart-line"></i> МАН</a>
 </div>
 <div style="margin: 20px; line-height: normal">
     @if(isset($pages[$cur_page]->content))
@@ -26,7 +28,7 @@
         @if ($pages->first())
          {!! $pages->first()->content !!}
         @else
-            <div style="text-align: center">Сторінка на стадії розроики</div>
+            <div style="text-align: center">Сторінка на стадії розробки</div>
         @endif
     @endif
 {{-- {!! isset($pages[$cur_page]->content) ? $pages[$cur_page]->content : isset($pages->first()) ? $pages->first()->content : '' !!}--}}

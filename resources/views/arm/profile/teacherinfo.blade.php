@@ -13,7 +13,7 @@
                         action="{{route('saveteacherinfo')}}"
                         method="POST" name="f_private" id="f_private">
                     @csrf
-                    <input type="hidden" name="id_teacher_f" id="id_teacher_f" value="{{auth()->user()->id}}">
+                    <input type="hidden" name="id_teacher_f" id="id_teacher_f" value="{{auth()->user()->teacher_id}}">
                     <div style="display: flex">
                         <div>
                             <img src="" alt="Світлина вчителя" id="teacher_img" style="width: 60px; border: 1px solid silver; margin-right: 2px; border-radius: 3px">

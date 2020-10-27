@@ -117,21 +117,31 @@ class Olympstatistics extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
+        $subjects = Subject::pluck('name','id')->toArray();
+        $teachers = Teacher::orderBy('snp')->pluck('snp','id')->toArray();
+
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()->addColumn([
-                AdminFormElement::text('name', 'Name')
-                    ->required()
-                ,
-                AdminFormElement::html('<hr>'),
-                AdminFormElement::datetime('created_at')
-                    ->setVisible(true)
-                    ->setReadonly(false)
-                ,
-                AdminFormElement::html('last AdminFormElement without comma')
-            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
-                AdminFormElement::text('id', 'ID')->setReadonly(true),
-                AdminFormElement::html('last AdminFormElement without comma')
-            ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
+                AdminFormElement::select('level', 'Етап')
+                    ->setOptions([2=>2,3=>3,4=>4,5=>5])
+                    ->required(),
+                AdminFormElement::select('subject_id', 'Предмет')
+                    ->setOptions($subjects)
+                    ->setLabel('Предмет')
+                    ->required(),
+                AdminFormElement::select('teacher_id', 'Вчитель')
+                    ->setOptions($teachers)
+                    ->setLabel('Вчитель')
+                    ->required(),
+            ], 'col-xs-6 col-sm-6 col-md-6 col-lg-6')
+            ->addColumn([
+                AdminFormElement::text('year', 'Рік')->required(),
+                AdminFormElement::select('position', 'Місце')
+                    ->setOptions([1=>1,2=>2,3=>3])
+                    ->required(),
+                AdminFormElement::text('pupil', 'Учень')->required(),
+            ],'col-xs-6 col-sm-6 col-md-6 col-lg-6')
+
         ]);
 
         $form->getButtons()->setButtons([

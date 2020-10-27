@@ -3,10 +3,16 @@
 namespace App\Http\Sections;
 
 use AdminColumn;
+use AdminColumnEditable;
 use AdminColumnFilter;
 use AdminDisplay;
+use AdminDisplayFilter;
 use AdminForm;
 use AdminFormElement;
+use App\Manstatistic;
+use App\Mansubject;
+use App\Subject;
+use App\Teacher;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
@@ -56,27 +62,33 @@ class Manstatistics extends Section implements Initializable
      */
     public function onDisplay($payload = [])
     {
+        $teachers = Teacher::pluck('snp','id')->toArray();
+        $subjects = Mansubject::pluck('name','id')->toArray();
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumn::link('name', 'Name', 'created_at')
+            AdminColumnEditable::text('pupil', 'Учень')
                 ->setSearchCallback(function($column, $query, $search){
                     return $query
-                        ->orWhere('name', 'like', '%'.$search.'%')
-                        ->orWhere('created_at', 'like', '%'.$search.'%')
-                    ;
-                })
-                ->setOrderable(function($query, $direction) {
-                    $query->orderBy('created_at', $direction);
-                })
+                        ->orWhere('pupil', 'like', '%'.$search.'%')
+                        ;
+                }),
+            AdminColumnEditable::select('teacher_id')->setLabel('Наставник')
+                ->setOptions($teachers)
+                ->setDisplay('Наставник')
+                ->setTitle('Оберіть наставника')
+                ->append(AdminColumn::filter('teacher_id'))
             ,
-            AdminColumn::boolean('name', 'On'),
-            AdminColumn::text('created_at', 'Created / updated', 'updated_at')
-                ->setWidth('160px')
-                ->setOrderable(function($query, $direction) {
-                    $query->orderBy('updated_at', $direction);
-                })
-                ->setSearchable(false)
+            AdminColumnEditable::select('subject_id')->setLabel('Предмет')
+                ->setOptions($subjects)
+                ->setDisplay('Предмет')
+                ->setTitle('Оберіть предмет')
+
             ,
+            AdminColumnEditable::text('level','Етап')
+                ->append(AdminColumn::filter('level')),
+            AdminColumnEditable::text('position','Місце')
+                ->append(AdminColumn::filter('position')),
+            AdminColumnEditable::text('year','Рік'),
         ];
 
         $display = AdminDisplay::datatables()
@@ -85,21 +97,15 @@ class Manstatistics extends Section implements Initializable
             ->setDisplaySearch(true)
             ->paginate(25)
             ->setColumns($columns)
-            ->setHtmlAttribute('class', 'table-primary table-hover th-center')
         ;
 
-        $display->setColumnFilters([
-            AdminColumnFilter::select()
-                ->setModelForOptions(\App\Manstatistic::class, 'name')
-                ->setLoadOptionsQueryPreparer(function($element, $query) {
-                    return $query;
-                })
-                ->setDisplay('name')
-                ->setColumnName('name')
-                ->setPlaceholder('All names')
-            ,
-        ]);
-        $display->getColumnFilters()->setPlacement('card.heading');
+        $display->setFilters(
+            AdminDisplayFilter::related('teacher_id','Наствник')->setModel(Teacher::class),
+            AdminDisplayFilter::related('subject_id','Предмет')->setModel(Mansubject::class),
+            AdminDisplayFilter::related('position','Місце')->setModel(Manstatistic::class),
+            AdminDisplayFilter::related('level','Етап')->setModel(Manstatistic::class)
+        );
+
 
         return $display;
     }
@@ -112,21 +118,31 @@ class Manstatistics extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
+        $subjects = Mansubject::pluck('name','id')->toArray();
+        $teachers = Teacher::orderBy('snp')->pluck('snp','id')->toArray();
+
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()->addColumn([
-                AdminFormElement::text('name', 'Name')
-                    ->required()
-                ,
-                AdminFormElement::html('<hr>'),
-                AdminFormElement::datetime('created_at')
-                    ->setVisible(true)
-                    ->setReadonly(false)
-                ,
-                AdminFormElement::html('last AdminFormElement without comma')
-            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
-                AdminFormElement::text('id', 'ID')->setReadonly(true),
-                AdminFormElement::html('last AdminFormElement without comma')
-            ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
+                AdminFormElement::select('level', 'Етап')
+                    ->setOptions([1=>1,2=>2,3=>3])
+                    ->required(),
+                AdminFormElement::select('subject_id', 'Предмет')
+                    ->setOptions($subjects)
+                    ->setLabel('Предмет')
+                    ->required(),
+                AdminFormElement::select('teacher_id', 'Вчитель')
+                    ->setOptions($teachers)
+                    ->setLabel('Вчитель')
+                    ->required(),
+            ], 'col-xs-6 col-sm-6 col-md-6 col-lg-6')
+                ->addColumn([
+                    AdminFormElement::text('year', 'Рік')->required(),
+                    AdminFormElement::select('position', 'Місце')
+                        ->setOptions([1=>1,2=>2,3=>3])
+                        ->required(),
+                    AdminFormElement::text('pupil', 'Учень')->required(),
+                ],'col-xs-6 col-sm-6 col-md-6 col-lg-6')
+
         ]);
 
         $form->getButtons()->setButtons([

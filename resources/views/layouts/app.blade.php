@@ -1,6 +1,14 @@
 <!-- Price box minimal--><!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
 <head>
+
+    <title>{{ config('app.name', 'XEOL') }} | @yield('title','XEOL')</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    {!! OpenGraph::renderTags() !!}
+
     <link rel="apple-touch-icon" sizes="180x180" href="{{url('assets/images/favicons/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{url('assets/images/favicons/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{url('assets/images/favicons/favicon-16x16.png')}}">
@@ -21,11 +29,6 @@
     <!-- template styles -->
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/responsive.css')}}">
-
-    <title>{{ config('app.name', 'XEOL') }} | @yield('title','XEOL')</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
 {{--    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166193936-1"></script>--}}
