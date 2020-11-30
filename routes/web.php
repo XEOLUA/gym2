@@ -40,6 +40,10 @@ Route::get('/statistics/olymps/pupils/{pupil}', 'HomeController@statisticsolympp
 Route::get('/statistics/mans/pupils/{pupil}', 'HomeController@statisticsmanpupil')->name('statisticsmanpupil');
 Route::get('/statistics/olymps/teachers/{teacher}', 'HomeController@statisticsolympteacher')->name('statisticsolympteacher');
 Route::get('/statistics/mans/teachers/{teacher}', 'HomeController@statisticsmanteacher')->name('statisticsmanteacher');
+Route::get('/teachersbirthday/{month}', 'HomeController@teachersbirthday')->name('teachersbirthday');
+Route::get('/bells', 'HomeController@bells')->name('bells');
+Route::get('/history', 'HistoryYearController@index')->name('history');
+Route::get('/react', 'HistoryYearController@react')->name('react');
 
 Route::get('/statistics/man/{level?}/{subject?}/{year?}', 'HomeController@statisticsman')->name('statisticsman');
 Route::get('/classes/{class_id?}/', 'HomeController@classes')->name('classes');
@@ -47,6 +51,11 @@ Route::get('/classes/{class_id?}/', 'HomeController@classes')->name('classes');
 Route::prefix('/teachers/page/')->group(function () {
     Route::get('{teacher_id}', 'HomeController@teacherspages')->name('teacherspages');
     Route::get('{teacher_id}/{page}', 'HomeController@teacherspages')->name('teacherspages');
+});
+
+Route::prefix('search')->group(function () {
+    Route::post('results/{text?}','SearchController@index')->name('search-results');
+//    Route::get('results/{page?}','SearchController@show')->name('search-results');
 });
 
 Route::middleware(['auth'])->group(function () {

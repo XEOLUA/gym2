@@ -44,7 +44,7 @@
             </div>
     <a class="course-one__link" id="btnShowMoreNewses" style="cursor:pointer">Переглянути більше</a>
 </div>
-
+    @include('home.search-popup')
     @include('home.footer')
 
     </div><!-- /.page-wrapper -->

@@ -49,7 +49,7 @@ class Menus extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-list');
+//        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-list');
     }
 
     /**

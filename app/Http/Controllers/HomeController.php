@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bell;
 use App\Circle;
 use App\Classe;
 use App\Direction;
@@ -69,7 +70,7 @@ class HomeController extends BaseController
         $olympstat = $olymp->groupBy('level');
         $manstat = $man->groupBy('level');
 
-        $news = News::with('newstypes')->take(10)->get();
+        $news = News::with('newstypes')->orderByDesc('updated_at')->take(10)->get();
 
         $circles = Circle::where('active',1)->get()->sortBy('order');
         $sliders = Slider::where('active',1)->get()->sortBy('order');
@@ -453,5 +454,28 @@ class HomeController extends BaseController
         $all_pupils = $ar->sum();
 
         return view('classes',compact('classes','all_pupils','cl'));
+    }
+
+    public function teachersbirthday($month){
+        $teachers = DB::table('teachers')
+            ->where('active',1)
+            ->whereRaw('month(date)='.$month)
+            ->orderBy('date')
+            ->get();
+
+        return json_encode($teachers,1);
+    }
+
+    public function bells(){
+
+        $og = OpenGraph::title('GYM2.KM.UA | Розклад дзвінків')
+            ->type('page')
+            ->sitename('Сайт гімназії №2 м.Хмельницького')
+            ->image(url('images/og_main.png'))
+            ->description('Управління освіти Хмельницької міської ради. Гімназія №2 м.Хмельницького. Функціонує з 2000 року як гімназія №2, до цього – ЗОШ №11 з 1969 року.')
+            ->url();
+
+        $bells = Bell::all();
+        return view('bells',compact('bells'));
     }
 }

@@ -6,12 +6,8 @@ use AdminColumn;
 use AdminColumnEditable;
 use AdminColumnFilter;
 use AdminDisplay;
-use AdminDisplayFilter;
 use AdminForm;
 use AdminFormElement;
-use App\Classe;
-use App\Pupil;
-use App\Teacher;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
@@ -23,13 +19,13 @@ use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 use SleepingOwl\Admin\Section;
 
 /**
- * Class Pupils
+ * Class HistoryYears
  *
- * @property \App\Pupil $model
+ * @property \App\HistoryYear $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Pupils extends Section implements Initializable
+class HistoryYears extends Section implements Initializable
 {
     /**
      * @var bool
@@ -39,7 +35,7 @@ class Pupils extends Section implements Initializable
     /**
      * @var string
      */
-    protected $title="Учні";
+    protected $title="Історія гімназії";
 
     /**
      * @var string
@@ -51,7 +47,7 @@ class Pupils extends Section implements Initializable
      */
     public function initialize()
     {
-//        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-user-graduate');
+//        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-history');
     }
 
     /**
@@ -61,41 +57,22 @@ class Pupils extends Section implements Initializable
      */
     public function onDisplay($payload = [])
     {
-        $classes = Classe::with('teachers')->get()->keyBy('id');
-        $cl = $classes->pluck('name','id')->toArray();
-
         $columns = [
-            AdminColumn::text('id', '#')->setWidth('50px'),
-            AdminColumnEditable::text('snp', 'ПІБ')
-                ->setOrderable(function($query, $direction) {
-                    $query->orderBy('snp', $direction);
-                }),
-            AdminColumnEditable::select('class_id')
-            ->setOptions($cl)
-            ->setLabel('Клас')
-            ->append(AdminColumn::filter('class_id'))
-            ,
-            AdminColumn::custom('Керівник',function (\App\Pupil $model)use(&$classes){
-                return $classes[$model->class_id]->teachers->snp;
-            }),
+            AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
+            AdminColumnEditable::text('year', 'Рік')->setWidth('100px'),
+            AdminColumn::image('image', 'Зображення'),
 
-            AdminColumnEditable::checkbox('archive','Вибув')
         ];
 
         $display = AdminDisplay::datatables()
             ->setName('firstdatatables')
-//            ->setOrder([[1, 'asc']])
-//            ->setApply(function ($query) {
-//                $query->orderBy('snp');
-//            })
+            ->setApply(function ($query) {
+                $query->orderBy('id', 'desc');
+            })
             ->setDisplaySearch(true)
-            ->paginate(40)
+            ->paginate(25)
             ->setColumns($columns)
         ;
-
-        $display->setFilters(
-            AdminDisplayFilter::related('class_id','Клас')->setModel(Classe::class)
-        );
 
         return $display;
     }
@@ -108,25 +85,14 @@ class Pupils extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
-        $classes = Classe::pluck('name','id')->toArray();
-
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()->addColumn([
-                AdminFormElement::text('alpha', 'Alpha'),
-                AdminFormElement::text('snp', 'ПІБ'),
-                AdminFormElement::date('dt', 'Дата народження'),
-                AdminFormElement::select('sex', 'стать')
-                    ->setOptions(['1'=>'Чол','2'=>'Жін']),
-                AdminFormElement::select('class_id', 'Клас')
-                    ->setOptions($classes),
+                AdminFormElement::text('year', 'Рік')
+                    ->required()
+                ,AdminFormElement::image('image','Зображення'),
             ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
-                AdminFormElement::text('id', 'ID')->setReadonly(true),
-                AdminFormElement::text('address', 'Адреса'),
-                AdminFormElement::text('mail', 'E-mail'),
+                AdminFormElement::ckeditor('description', 'Опис'),
 
-                AdminFormElement::text('parents', 'Батьки'),
-                AdminFormElement::checkbox('archive','Архів'),
-                AdminFormElement::html('last AdminFormElement without comma')
             ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
         ]);
 

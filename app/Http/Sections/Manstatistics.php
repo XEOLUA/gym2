@@ -52,7 +52,7 @@ class Manstatistics extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-hand-peace');
+//        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-hand-peace');
     }
 
     /**

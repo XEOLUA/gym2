@@ -9,6 +9,7 @@
     @include('home.preloader')
     @include('home.topbar-one')
     @include('home.header')
+    @include('home.search-popup')
 
         <div style="max-width:90%; margin: 30px; text-align: center;">
             <h4 style="text-align: center;line-height: normal;  margin: 30px 0 0 0;">Навчальних класів: {{$classes->count()}}</h4>

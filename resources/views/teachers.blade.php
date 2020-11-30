@@ -4,14 +4,14 @@
 @section('title','Педагогічний колектив')
 
 @section('content')
-
+    <link rel="stylesheet" href="{{url('css/calendar.css')}}">
     <div class="page-wrapper">
     @include('home.preloader')
     @include('home.topbar-one')
     @include('home.header')
     <h3 style="text-align: center; margin-top: 30px">Педагогічний колектив</h3>
     <div style="display:flex;flex-wrap:wrap;justify-content: center;margin:20px 20px 20px 0px;">
-
+    @include('home.search-popup')
     @foreach($teachers as $teacher)
         <div onclick="location='{{url('teachers/page/'.$teacher->id)}}'">
             <img class="teachersphotos" style="margin:2px; cursor:pointer"
@@ -24,8 +24,15 @@
         </div>
     @endforeach
     </div>
+    @include('calendar')
+        <script src="{{url('js/calendar.js')}}"></script>
     @include('home.footer')
 
     </div><!-- /.page-wrapper -->
-
+    <script src="{{url('assets/js/jquery.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            outmarktocalendar(new Date().getMonth() + 1);
+        });
+    </script>
 @endsection

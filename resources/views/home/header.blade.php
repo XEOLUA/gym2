@@ -9,7 +9,7 @@
                 </a>
                 <div class="header__social">
 {{--                    <a href="#"><i class="fab fa-twitter"></i></a>--}}
-                    <a href="#"><i class="fab fa-facebook-square"></i></a>
+                    <a href="https://tinyurl.com/y6qslvqe" target="_blank"><i class="fab fa-facebook-square"></i></a>
 {{--                    <a href="#"><i class="fab fa-pinterest-p"></i></a>--}}
 {{--                    <a href="#"><i class="fab fa-instagram"></i></a>--}}
                 </div><!-- /.header__social -->

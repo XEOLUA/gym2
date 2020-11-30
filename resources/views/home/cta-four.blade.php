@@ -8,11 +8,11 @@
         </div><!-- /.block-title -->
 
         <div class="cta-four__text" style="line-height: normal;display:inline-block; width: 300px;text-align: left">
-            <span style="color: orange; font-weight: bold">{{$teachers_statistics['all']}}</span> - вчителів працює у гімназії<br>
+            <span style="color: orange; font-weight: bold">{{$teachers_statistics['all']}}</span> - {{\App\Services\GetSuffixByNumber::get_suffix($teachers_statistics['all'],'вчитель','вчителя','вчителів')}} працює у гімназії<br>
 
             <div style="padding-top: 10px; font-weight: bold">Зі званням:</div>
-            <span style="color: orange; font-weight: bold">{{$teachers_statistics['title']['method']}}</span> - вчителів-методистів<br>
-            <span style="color: orange; font-weight: bold">{{$teachers_statistics['title']['hight']}}</span> - старших вчителів<br>
+            <span style="color: orange; font-weight: bold">{{$teachers_statistics['title']['method']}}</span> - {{\App\Services\GetSuffixByNumber::get_suffix($teachers_statistics['title']['method'],'вчитель','вчителя','вчителів')}}-{{\App\Services\GetSuffixByNumber::get_suffix($teachers_statistics['title']['method'],'методист','методисти','методистів')}}<br>
+            <span style="color: orange; font-weight: bold">{{$teachers_statistics['title']['hight']}}</span> - {{\App\Services\GetSuffixByNumber::get_suffix($teachers_statistics['title']['hight'],'старший','старших','старших')}} {{\App\Services\GetSuffixByNumber::get_suffix($teachers_statistics['title']['hight'],'вчитель','вчителя','вчителів')}}<br>
 
             <div style="padding-top: 10px; font-weight: bold">З категорією:</div>
             <span style="color: orange; font-weight: bold">{{$teachers_statistics['category']['hight']}}</span> - вищої категорії<br>

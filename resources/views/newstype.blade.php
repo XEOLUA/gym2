@@ -9,7 +9,7 @@
     @include('home.preloader')
     @include('home.topbar-one')
     @include('home.header')
-
+    @include('home.search-popup')
 <div style="padding: 20px; text-align: center; line-height: normal">
     @if(isset($newstype[0]->name))
         <h2>{{$newstype[0]->name}}</h2>

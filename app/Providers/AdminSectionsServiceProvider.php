@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Bell;
 use App\Cabinet;
 use App\Circle;
 use App\Classe;
 use App\Direction;
+use App\HistoryYear;
 use App\Manstatistic;
 use App\Menu;
 use App\Mo;
@@ -39,10 +41,12 @@ class AdminSectionsServiceProvider extends ServiceProvider
 //        Navigation::class => 'App\Http\Sections\Navigation',
         Page::class => 'App\Http\Sections\Pages',
         Direction::class => 'App\Http\Sections\Directions',
+
         Mo::class => 'App\Http\Sections\Mos',
         Teacher::class => 'App\Http\Sections\Teachers',
         Position::class => 'App\Http\Sections\Positions',
         Classe::class => 'App\Http\Sections\Classes',
+
         Pupil::class => 'App\Http\Sections\Pupils',
         Socialgroup::class => 'App\Http\Sections\Socialgroups',
         Cabinet::class => 'App\Http\Sections\Cabinets',
@@ -51,6 +55,8 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Manstatistic::class => 'App\Http\Sections\Manstatistics',
         Circle::class => 'App\Http\Sections\Circles',
         Slider::class => 'App\Http\Sections\Sliders',
+        Bell::class => 'App\Http\Sections\Bells',
+        HistoryYear::class => 'App\Http\Sections\HistoryYears',
     ];
 
     /**

@@ -47,7 +47,7 @@ class Newstypes extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(1)->setIcon('fas fa-newspaper');
+//        $this->addToNavigation()->setPriority(1)->setIcon('fas fa-newspaper');
     }
 
     /**
