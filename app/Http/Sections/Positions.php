@@ -47,7 +47,7 @@ class Positions extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-id-card-alt');
+//        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-id-card-alt');
     }
 
     /**

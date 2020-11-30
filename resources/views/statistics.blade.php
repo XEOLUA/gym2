@@ -9,6 +9,7 @@
     @include('home.preloader')
     @include('home.topbar-one')
     @include('home.header')
+        @include('home.search-popup')
 
         <div style="max-width: 300px; margin: 20px auto 0 auto;">
             <table style="width: 100%; text-align: center" cellspacing="0" cellpadding="0">

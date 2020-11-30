@@ -48,7 +48,7 @@ class Pages extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-file-alt');
+//        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-file-alt');
     }
 
     /**

@@ -47,7 +47,7 @@ class Subjects extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-book-reader');
+//        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-book-reader');
     }
 
     /**

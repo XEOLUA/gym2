@@ -19,13 +19,13 @@ use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 use SleepingOwl\Admin\Section;
 
 /**
- * Class Socialgroups
+ * Class Bells
  *
- * @property \App\Socialgroup $model
+ * @property \App\Bell $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Socialgroups extends Section implements Initializable
+class Bells extends Section implements Initializable
 {
     /**
      * @var bool
@@ -35,7 +35,7 @@ class Socialgroups extends Section implements Initializable
     /**
      * @var string
      */
-    protected $title="Соціальні групи";
+    protected $title="Розклад дзвінків";
 
     /**
      * @var string
@@ -47,7 +47,7 @@ class Socialgroups extends Section implements Initializable
      */
     public function initialize()
     {
-//        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-people-arrows');
+//        $this->addToNavigation()->setPriority(100)->setIcon('far fa-bell');
     }
 
     /**
@@ -58,15 +58,11 @@ class Socialgroups extends Section implements Initializable
     public function onDisplay($payload = [])
     {
         $columns = [
-            AdminColumn::text('id', '#')->setWidth('50px'),
-            AdminColumnEditable::text('name', 'Name')
-                ->setSearchCallback(function($column, $query, $search){
-                    return $query
-                        ->orWhere('name', 'like', '%'.$search.'%')
-                    ;
-                })
-            ,
-            AdminColumn::count('pupils')->setLabel('Учнів'),
+            AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
+            AdminColumn::text('number', '#'),
+            AdminColumnEditable::datetime('begin', 'Початок'),
+            AdminColumnEditable::datetime('end', 'Кінець'),
+
         ];
 
         $display = AdminDisplay::datatables()
@@ -90,19 +86,10 @@ class Socialgroups extends Section implements Initializable
     {
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()->addColumn([
-                AdminFormElement::text('name', 'Name')
-                    ->required()
-                ,
-                AdminFormElement::html('<hr>'),
-                AdminFormElement::datetime('created_at')
-                    ->setVisible(true)
-                    ->setReadonly(false)
-                ,
-                AdminFormElement::html('last AdminFormElement without comma')
-            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
-                AdminFormElement::text('id', 'ID')->setReadonly(true),
-                AdminFormElement::html('last AdminFormElement without comma')
-            ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
+                AdminFormElement::text('number', '#')->required(),
+                AdminFormElement::time('begin', 'початок')->required(),
+                AdminFormElement::time('end', 'кінець')->required(),
+            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4'),
         ]);
 
         $form->getButtons()->setButtons([

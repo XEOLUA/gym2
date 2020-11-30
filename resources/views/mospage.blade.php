@@ -9,6 +9,7 @@
     @include('home.preloader')
     @include('home.topbar-one')
     @include('home.header')
+        @include('home.search-popup')
 <div>
     <h4 style="text-align: center; padding: 20px 0 0 0; font-weight: bold">{{$mo[0]->name}}</h4>
     @foreach($mo[0]->teachers as $teacher)

@@ -4,9 +4,11 @@
         <div class="cursor-follower"></div>
     </div><!-- /.search-popup__overlay -->
     <div class="search-popup__inner">
-        <form action="#" class="search-popup__form">
-            <input type="text" name="search" placeholder="Type here to Search....">
+        <form action="{{route('search-results')}}" id="form_search" method="POST" class="search-popup__form">
+            @csrf
+            <input type="text" name="search" placeholder="Введіть текс пошуку ..." required>
             <button type="submit"><i class="kipso-icon-magnifying-glass"></i></button>
+            <input type="hidden" id="cur_page" name="cur_page" value="1">
         </form>
     </div><!-- /.search-popup__inner -->
 </div><!-- /.search-popup -->

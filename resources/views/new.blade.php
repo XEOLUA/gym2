@@ -47,6 +47,7 @@
             </div>
         </div>
         </div>
+    @include('home.search-popup')
     @include('home.footer')
 
     </div><!-- /.page-wrapper -->

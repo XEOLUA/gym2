@@ -47,15 +47,15 @@
                     </div><!-- /.become-teacher__top -->
                     <div class="become-teacher__form-content">
                         <div style="font-weight: bold"><a href="{{route('statisticsolymp')}}">Олімпіади</a></div>
-                        <div><a href="{{route('statisticsolymp',['level'=>4])}}"><span style="font-weight: bold; color:orange">{{count($olympstat[4])}}</span></a> - призер{{\App\Services\GetSuffixByNumber::get_suffix(count($olympstat[4]))}} на IV етапі</div>
-                        <div><a href="{{route('statisticsolymp',['level'=>3])}}"><span style="font-weight: bold; color:orange">{{count($olympstat[3])}}</span></a> - призер{{\App\Services\GetSuffixByNumber::get_suffix(count($olympstat[3]))}} на III етапі</div>
-                        <div><a href="{{route('statisticsolymp',['level'=>2])}}"><span style="font-weight: bold; color:orange">{{count($olympstat[2])}}</span></a> - призер{{\App\Services\GetSuffixByNumber::get_suffix(count($olympstat[2]))}} на II етапі</div>
+                        <div><a href="{{route('statisticsolymp',['level'=>4])}}"><span style="font-weight: bold; color:orange">{{count($olympstat[4])}}</span></a> - {{\App\Services\GetSuffixByNumber::get_suffix(count($olympstat[4]),'призер','призери','призерів')}} на IV етапі</div>
+                        <div><a href="{{route('statisticsolymp',['level'=>3])}}"><span style="font-weight: bold; color:orange">{{count($olympstat[3])}}</span></a> - {{\App\Services\GetSuffixByNumber::get_suffix(count($olympstat[3]),'призер','призери','призерів')}} на III етапі</div>
+                        <div><a href="{{route('statisticsolymp',['level'=>2])}}"><span style="font-weight: bold; color:orange">{{count($olympstat[2])}}</span></a> - {{\App\Services\GetSuffixByNumber::get_suffix(count($olympstat[2]),'призер','призери','призерів')}} на II етапі</div>
 {{--                        <a href="{{url('page/olymp-statistics')}}" class="course-one__link">Дізнатися більше</a>--}}
 
                         <div style="font-weight: bold; margin-top: 30px;"><a href="{{route('statisticsman')}}">МАН</a></div>
-                        <div><a href="{{route('statisticsman',['level'=>3])}}"><span style="font-weight: bold; color:orange">{{count($manstat[3])}}</span></a> - призер{{\App\Services\GetSuffixByNumber::get_suffix(count($manstat[2]))}} на III етапі</div>
-                        <div><a href="{{route('statisticsman',['level'=>2])}}"><span style="font-weight: bold; color:orange">{{count($manstat[2])}}</span></a> - призер{{\App\Services\GetSuffixByNumber::get_suffix(count($manstat[2]))}} на II етапі</div>
-                        <div><a href="{{route('statisticsman',['level'=>1])}}"><span style="font-weight: bold; color:orange">{{count($manstat[1])}}</span></a> - призер{{\App\Services\GetSuffixByNumber::get_suffix(count($manstat[1]))}} на I етапі</div>
+                        <div><a href="{{route('statisticsman',['level'=>3])}}"><span style="font-weight: bold; color:orange">{{count($manstat[3])}}</span></a> - {{\App\Services\GetSuffixByNumber::get_suffix(count($manstat[3]),'призер','призери','призерів')}} на III етапі</div>
+                        <div><a href="{{route('statisticsman',['level'=>2])}}"><span style="font-weight: bold; color:orange">{{count($manstat[2])}}</span></a> - {{\App\Services\GetSuffixByNumber::get_suffix(count($manstat[2]),'призер','призери','призерів')}} на II етапі</div>
+                        <div><a href="{{route('statisticsman',['level'=>1])}}"><span style="font-weight: bold; color:orange">{{count($manstat[1])}}</span></a> - {{\App\Services\GetSuffixByNumber::get_suffix(count($manstat[1]),'призер','призери','призерів')}} на I етапі</div>
 
                         {{--                        <input type="text" placeholder="Your Name" name="name">--}}
 {{--                        <input type="text" placeholder="Email Address" name="email">--}}

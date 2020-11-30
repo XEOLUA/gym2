@@ -47,7 +47,7 @@ class Circles extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-user-friends');
+//        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-user-friends');
     }
 
     /**

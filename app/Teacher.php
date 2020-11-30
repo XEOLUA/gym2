@@ -5,6 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
+/**
+ * Class Teacher
+ * @package App
+ * @mixin Eloquent
+ */
 class Teacher extends Eloquent
 {
     public function directions()
@@ -56,4 +61,8 @@ class Teacher extends Eloquent
         return $this->belongsToMany('App\Pupil','classes');
     }
 
+    public function positions()
+    {
+        return $this->belongsTo('App\Position', 'position', 'id');
+    }
 }

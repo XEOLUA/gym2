@@ -7271,3 +7271,21 @@ a:visited {
 .stat-block{
   margin-left: 20px;
 }
+
+.spoiler > input + .box{
+  display: none;
+}
+
+.spoiler > input:checked + .box{
+  display: block;
+}
+
+.box{
+  margin-left: 100px;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.spoiler{
+  margin-bottom: 10px;
+}

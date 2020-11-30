@@ -1,5 +1,5 @@
-<script src="{{url('packages/sleepingowl/ckeditor/ckeditor.js')}}"></script>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<script defer src="{{url('packages/sleepingowl/ckeditor/ckeditor.js')}}" async></script>
+<div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -19,10 +19,10 @@
                                id="title_f" name="title_f">
                     </div>
                     <div>
-                        <textarea style="width: 100%" name="content_f" id="content_f" rows="5"></textarea>
-                        <script>
-                            CKEDITOR.replace( 'content_f' );
-                        </script>
+                        <textarea style="width:100%" name="content_f" id="content_f" rows="5"></textarea>
+{{--                        <script>--}}
+{{--                            CKEDITOR.replace( 'content_f');--}}
+{{--                        </script>--}}
                     </div>
                 </form>
             </div>
@@ -33,3 +33,4 @@
         </div>
     </div>
 </div>
+

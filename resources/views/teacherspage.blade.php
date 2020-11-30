@@ -10,6 +10,7 @@
     @include('home.preloader')
     @include('home.topbar-one')
     @include('home.header')
+    @include('home.search-popup')
 <div style="padding: 20px; text-align: left; line-height: normal; border-bottom: 1px solid silver; margin: 20px;">
     @foreach($pages as $page)
         <a
