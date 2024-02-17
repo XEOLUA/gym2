@@ -15,7 +15,7 @@
                                 {!! $slider->title ?? 'У нас<br>вчаться' !!}
                                 </h3><!-- /.banner-one__title -->
                             <p class="banner-one__tag-line">а ви готові?</p><!-- /.banner-one__tag-line -->
-                            <a href="{{url('page/fellows')}}" class="thm-btn banner-one__btn">Дізнатися більше</a>
+                            <a href="{{url('page/important_news')}}" class="thm-btn banner-one__btn">Дізнатися більше</a>
                         </div><!-- /.col-xl-12 -->
                     </div><!-- /.row -->
                 </div><!-- /.container -->
