@@ -1,7 +1,7 @@
 <div class="topbar-one">
     <div class="container">
         <div class="topbar-one__left">
-            <a href="#">gym2@ukr.net</a>
+            <a href="#">liceum11khm@gmail.com</a>
             <a href="#">(0382) 63-20-64</a>
             <a href="#">(0382) 63-27-32</a>
         </div><!-- /.topbar-one__left -->
